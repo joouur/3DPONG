@@ -16,10 +16,18 @@ public class PaddleController : MonoBehaviour {
 	void Update () {
         //these two translations get the mouse position and multiply it by a set speed
         //it is then multiplied by timedelta and then the translation is made.
-        translationX = Input.GetAxis("Mouse X") * speed; 
-        translationY = Input.GetAxis("Mouse Y") * speed;
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        
+        translationX =  mouseX * speed; 
+        translationY =  mouseY * speed;
         translationX *= Time.deltaTime;
         translationY *= Time.deltaTime;
+        if ((translationX >= -4.4 && translationX <=4.4) && 
+            (translationY >= -1.8 && translationY <= 4.8))
+        {
+
+        }
         transform.Translate(translationX, translationY, 0f);
     }
 }

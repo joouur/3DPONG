@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/JorgeScene.unity
-  isLoaded: 1
-  isActive: 1

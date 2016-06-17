@@ -236,6 +236,14 @@
         <para>See: Editor.OnInspectorGUI.</para>
       </summary>
     </member>
+<<<<<<< HEAD
+=======
+    <member name="T:UnityEditor.UI.MaskEditor">
+      <summary>
+        <para>Custom Editor for the Mask component.</para>
+      </summary>
+    </member>
+>>>>>>> 3ffea7151e48ceb222a21106376e120bceedd521
     <member name="T:UnityEditor.UI.NavigationDrawer">
       <summary>
         <para>PropertyDrawer for Navigation.</para>

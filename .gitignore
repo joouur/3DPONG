@@ -6,6 +6,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.tmp
+*.csproj
+*.unityproj
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -21,6 +24,11 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+*.apk
+*.unitypackage
+*.pidb.meta
+sysinfo.txt
+
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -251,3 +259,25 @@ paket-files/
 .idea/
 *.sln.iml
 3DPONG/Temp/UnityLockfile
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild
+/[Ll]ibrary/
+sysinfo.txt
+*.stackdump

@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/JoshScence.unity
-  isLoaded: 1
-  isActive: 1

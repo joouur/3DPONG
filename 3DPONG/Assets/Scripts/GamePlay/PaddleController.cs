@@ -6,7 +6,10 @@ public class PaddleController : MonoBehaviour {
     public float speed = 50f;
     float translationX; // movement of paddle in x direction
     float translationY; // movement of paddle in y direction
-    
+    public float negXBound = -4.4f;
+    public float posXBound = 4.4f;
+    public float negYBound = -1.8f;
+    public float posYBound = 4.8f;
 	// Use this for initialization
 	void Start () {
 	
@@ -25,8 +28,8 @@ public class PaddleController : MonoBehaviour {
         translationY *= Time.deltaTime;
 
         Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(pos.x + mouseX, -4.4f, 4.4f);
-        pos.y = Mathf.Clamp(pos.y + mouseY, -1.8f, 4.8f);
+        pos.x = Mathf.Clamp(pos.x + mouseX, negXBound, posXBound);
+        pos.y = Mathf.Clamp(pos.y + mouseY, negYBound, posYBound);
         transform.position = pos;
     }
 }

@@ -23,11 +23,6 @@ public class PaddleController : MonoBehaviour {
         translationY =  mouseY * speed;
         translationX *= Time.deltaTime;
         translationY *= Time.deltaTime;
-        if ((translationX >= -4.4 && translationX <=4.4) && 
-            (translationY >= -1.8 && translationY <= 4.8))
-        {
-            
-        }
 
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x + mouseX, -4.4f, 4.4f);

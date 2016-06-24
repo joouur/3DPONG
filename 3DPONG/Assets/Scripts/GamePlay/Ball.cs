@@ -4,14 +4,22 @@ using System.Collections;
 public class Ball : MonoBehaviour {
 
     public Vector3 speed;
-    private Rigidbody BallRb;
+
+    [HideInInspector]
+    public Rigidbody BallRb;
+
+    [SerializeField]
+    private Vector3 grav;
     public float maxAngularSpeed;
     public void Start()
     {
         BallRb = GetComponent<Rigidbody>();
-        BallRb.useGravity = false;
-        BallRb.AddRelativeForce(Vector3.one * 500);
+        //BallRb.useGravity = false;
+        //BallRb.AddRelativeForce(Vector3.one * 500);
         BallRb.maxAngularVelocity = maxAngularSpeed;
+        BallRb.AddRelativeTorque(Vector3.one);
+        BallRb.velocity = new Vector3(0, -15, 0);
+        grav = new Vector3(0, -9.81f, 0);
     }
     // Update is called once per frame
     public void FixedUpdate()
@@ -21,12 +29,16 @@ public class Ball : MonoBehaviour {
 
         if(Physics.Raycast(ray, out hit))
         {
-            if(hit.collider.gameObject.name =="Player" || hit.collider.gameObject.name == "Enemy")
+            if(hit.collider.tag =="Player" || hit.collider.tag == "Enemy")
             {
                 transform.Rotate(Vector3.one);
                 speed = BallRb.velocity;
+                if(!Mathf.Approximately(BallRb.velocity.y, 150) || !Mathf.Approximately(BallRb.velocity.y, -150))
+                    speed *= 1.025f;
+                
             }
         }
+        
     }
 
     private void Movement(Vector3 m, Vector3 u)
@@ -35,6 +47,10 @@ public class Ball : MonoBehaviour {
 
     public void OnCollisionEnter(Collision other)
     {
-
+        if (other.collider.tag == "Player" || other.collider.tag == "Enemy")
+        {
+            Physics.gravity = grav;
+            grav = grav * -1.0f;
+        }
     }
 }

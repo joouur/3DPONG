@@ -4,7 +4,7 @@ using System.Collections;
 public class Ball : MonoBehaviour {
 
     public Vector3 speed;
-
+    public float startSpeed;
     [HideInInspector]
     public Rigidbody BallRb;
 
@@ -16,9 +16,11 @@ public class Ball : MonoBehaviour {
         BallRb = GetComponent<Rigidbody>();
         //BallRb.useGravity = false;
         //BallRb.AddRelativeForce(Vector3.one * 500);
+        if (startSpeed == 0)
+            startSpeed = -15.0f;
         BallRb.maxAngularVelocity = maxAngularSpeed;
         BallRb.AddRelativeTorque(Vector3.one);
-        BallRb.velocity = new Vector3(0, -15, 0);
+        BallRb.velocity = new Vector3(0, startSpeed, 0);
         grav = new Vector3(0, -9.81f, 0);
     }
     // Update is called once per frame
@@ -33,9 +35,11 @@ public class Ball : MonoBehaviour {
             {
                 transform.Rotate(Vector3.one);
                 speed = BallRb.velocity;
-                if(!Mathf.Approximately(BallRb.velocity.y, 150) || !Mathf.Approximately(BallRb.velocity.y, -150))
+                if (!(BallRb.velocity.magnitude > 100))
+                {
                     speed *= 1.025f;
-                
+                    //Debug.Log(BallRb.velocity.magnitude);
+                }
             }
         }
         

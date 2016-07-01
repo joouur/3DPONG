@@ -18,7 +18,7 @@ public class PaddleContact : MonoBehaviour
     {
         Vector3 cTangnt = new Vector3((normal.x * Mathf.Cos(1.5707f) - normal.y * (float)Mathf.Sin(1.5707f)),
                                     (normal.x * (float)Mathf.Sin(1.5707f) + normal.y * (float)Mathf.Cos(1.5707f)),
-                                    normal.x - normal.y);
+                                    0);
         float a = -Vector3.Dot(velo, normal);
         float b = Vector3.Dot(velo, cTangnt);
         Vector3 resultantVel = a * normal + b * cTangnt;

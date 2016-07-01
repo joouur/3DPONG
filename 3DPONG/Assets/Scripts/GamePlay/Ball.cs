@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour {
     [HideInInspector]
     public Rigidbody BallRb;
 
-    [SerializeField]
+    public float magnitude;
     private Vector3 grav;
     public float maxAngularSpeed;
     public void Start()
@@ -33,13 +33,14 @@ public class Ball : MonoBehaviour {
         {
             if(hit.collider.tag =="Player" || hit.collider.tag == "Enemy")
             {
-                transform.Rotate(Vector3.one);
+                //transform.Rotate(Vector3.one);
                 speed = BallRb.velocity;
-                if (!(BallRb.velocity.magnitude > 100))
+                if (!(BallRb.velocity.magnitude > 90))
                 {
                     speed *= 1.025f;
                     //Debug.Log(BallRb.velocity.magnitude);
                 }
+                magnitude = BallRb.velocity.magnitude;
             }
         }
         

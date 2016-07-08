@@ -3,19 +3,20 @@ using System.Collections;
 
 public class PaddleController : MonoBehaviour {
 
-    public float speed = 50f;
+    public float speed = 40f;
     float translationX; // movement of paddle in x direction
     float translationY; // movement of paddle in y direction
-    public float negXBound = -4.4f;
-    public float posXBound = 4.4f;
-    public float negZBound = -4.15f;
-    public float posZBound = 2.63f;
+    public float negXBound = -4.47f;
+    public float posXBound = 4.47f;
+    public float negZBound = -4.5f;
+    public float posZBound = 2.98f;
     public float smoothFactor = 0.3f;
     private Vector3 velocity = Vector3.zero;
 	// Use this for initialization
 	void Start () {
-	
-	}
+        Cursor.visible = false;
+        //gameObject.GetComponent<Renderer>().material.color = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {

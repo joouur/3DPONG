@@ -11,7 +11,7 @@ public class PaddleContact : MonoBehaviour
         if (!ball)
             ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
     }
-
+    /*
     public void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.name == "RollerBall")
@@ -23,7 +23,7 @@ public class PaddleContact : MonoBehaviour
 
         }
     }
-
+    */
     public Vector3 compVelocity(Vector3 normal, Vector3 velo)
     {
         Vector3 cTangnt = new Vector3((normal.x * Mathf.Cos(1.5707f) - normal.y * (float)Mathf.Sin(1.5707f)),

@@ -3,11 +3,11 @@ using System.Collections;
 
 public class AiController : MonoBehaviour {
 
-    public float speed = 50f;
-    public float negXBound = -4.4f;
-    public float posXBound = 4.4f;
-    public float negZBound = -4.16f;
-    public float posZBound = 2.66f;
+    public float speed = 25f;
+    public float negXBound = -4.47f;
+    public float posXBound = 4.47f;
+    public float negZBound = -4.5f;
+    public float posZBound = 2.98f;
     float translationX;
     float translationZ;
     Transform ball;
@@ -41,7 +41,7 @@ public class AiController : MonoBehaviour {
             Vector3 pos = transform.position;
             pos.x = Mathf.Clamp(ballX, negXBound, posXBound);
             pos.z = Mathf.Clamp(ballz, negZBound, posZBound);
-            transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime*.03f);
+            transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime*speed);
         }
         
 

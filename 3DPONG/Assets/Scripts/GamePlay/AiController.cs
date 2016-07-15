@@ -12,28 +12,14 @@ public class AiController : MonoBehaviour {
     float translationZ;
     Transform ball;
     // Use this for initialization
-    void Start () {
-        ball = GameObject.Find("RollerBall").transform;
-	}
+    void Start () {  
+        ball = GameObject.FindGameObjectWithTag("Ball").transform;
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        /*
-        float ballX = ball.position.x;
-        float ballz = ball.position.z;
-
-        translationX = ballX; //* speed;
-        translationZ = ballz; //* speed;
-        translationX *= Time.deltaTime;
-        translationZ *= Time.deltaTime;
-
-        
-        Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
-        pos.z = Mathf.Clamp(pos.z + translationZ, negZBound, posZBound);
-        transform.position = pos;
-        */
-        //transform.position = Vector3.MoveTowards(transform.position, ball.transform.position, Time.time);
+       
         if (ball.position.y < 0)
         {
             float ballX = ball.position.x;

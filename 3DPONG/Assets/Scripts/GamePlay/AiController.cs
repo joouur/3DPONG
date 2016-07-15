@@ -4,10 +4,10 @@ using System.Collections;
 public class AiController : MonoBehaviour {
 
     public float speed = 25f;
-    public float negXBound = -4.47f;
-    public float posXBound = 4.47f;
-    public float negZBound = -4.5f;
-    public float posZBound = 2.98f;
+    public float negXBound = -3.975f;
+    public float posXBound = 4f;
+    public float negZBound = -3.246f;
+    public float posZBound = 3.17f;
     float translationX;
     float translationZ;
     Transform ball;

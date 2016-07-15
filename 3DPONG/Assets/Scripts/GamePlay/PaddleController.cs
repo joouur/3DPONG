@@ -15,6 +15,7 @@ public class PaddleController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Cursor.visible = false;
+        GetComponent<Rigidbody>().isKinematic = true;
         //gameObject.GetComponent<Renderer>().material.color = 0;
     }
 	

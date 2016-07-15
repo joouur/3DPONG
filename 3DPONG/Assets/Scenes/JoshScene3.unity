@@ -874,7 +874,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11402588, guid: 6578dd1937a8f454381db7c2026a3983, type: 2}
       propertyPath: translationThrust
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6578dd1937a8f454381db7c2026a3983, type: 2}

@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pong.UI;
 
 public class Ball : MonoBehaviour {
 
     public Vector3 speed;
+    public Vector3 vel;
     public float startSpeed;
     [HideInInspector]
     public Rigidbody BallRb;
@@ -25,30 +27,9 @@ public class Ball : MonoBehaviour {
     }
     // Update is called once per frame
     public void FixedUpdate()
-    {
-        Ray ray = new Ray(this.gameObject.transform.position, BallRb.velocity * 15.0f);
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit))
-        {
-            if(hit.collider.tag =="Player" || hit.collider.tag == "Enemy")
-            {
-                //transform.Rotate(Vector3.one);
-                speed = BallRb.velocity;
-                if (!(BallRb.velocity.magnitude > 90))
-                {
-                    speed *= 1.025f;
-                    //Debug.Log(BallRb.velocity.magnitude);
-                }
-                magnitude = BallRb.velocity.magnitude;
-            }
-        }
-        
+    {        
     }
 
-    private void Movement(Vector3 m, Vector3 u)
-    {
-    }
 
     public void OnCollisionEnter(Collision other)
     {
@@ -56,6 +37,17 @@ public class Ball : MonoBehaviour {
         {
             Physics.gravity = grav;
             grav = grav * -1.0f;
+            speed = BallRb.velocity;
+            if (!(BallRb.velocity.magnitude > 100))
+            {
+                speed *= 1.025f;
+                Debug.Log(BallRb.velocity.magnitude);
+                BallRb.velocity = speed;
+
+            }
+            vel = BallRb.velocity;
+            magnitude = BallRb.velocity.magnitude;
+            ScoreUI.Instance.SetSpeed(magnitude);
         }
     }
 }

@@ -1,23 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace pong.UI
+namespace Pong.UI
 {
     public class PauseUI : MonoBehaviour
     {
+        public static PauseUI Instance;
 
         public Canvas PauseMenu;
         public Canvas MainMenu;
         public Canvas OptionsMenu;
         private bool paused;
+
         void Start()
         {
+            if (Instance != null)
+            {
+                Debug.Log("PauseUI is already in play. Deleting old Instantiating new.");
+                Destroy(gameObject);
+            }
+            else
+                Instance = this;
 
             PauseMenu.enabled = false;
             MainMenu.enabled = false;
             OptionsMenu.enabled = false;
             //OptionsMenu.enabled = false;
-            paused = true;
+            paused = false;
         }
 
         // Update is called once per frame

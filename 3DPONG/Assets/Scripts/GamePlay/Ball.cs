@@ -27,7 +27,9 @@ public class Ball : MonoBehaviour {
     }
     // Update is called once per frame
     public void FixedUpdate()
-    {        
+    {
+        magnitude = BallRb.velocity.magnitude;
+        ScoreUI.Instance.SetSpeed(magnitude);
     }
 
 
@@ -35,13 +37,15 @@ public class Ball : MonoBehaviour {
     {
         if (other.collider.tag == "Player" || other.collider.tag == "Enemy")
         {
+            if (other.collider.tag == "Player")
+                ScoreUI.Instance.SetBounces();
             Physics.gravity = grav;
             grav = grav * -1.0f;
             speed = BallRb.velocity;
             if (!(BallRb.velocity.magnitude > 100))
             {
                 speed *= 1.025f;
-                Debug.Log(BallRb.velocity.magnitude);
+                //Debug.Log(BallRb.velocity.magnitude);
                 BallRb.velocity = speed;
 
             }

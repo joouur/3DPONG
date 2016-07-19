@@ -6,7 +6,7 @@ public class PaddleContact : MonoBehaviour
 
     public Ball ball;
     public bool POrAI;
-    public void Awake()
+    public void Start()
     {
         if (!ball)
             ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();

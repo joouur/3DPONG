@@ -6,6 +6,7 @@ public class PaddleContact : MonoBehaviour
 
     public Ball ball;
     public bool POrAI;
+
     public void Start()
     {
         if (!ball)

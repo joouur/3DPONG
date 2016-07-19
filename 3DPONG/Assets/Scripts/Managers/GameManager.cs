@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance;
 
-    public Transform RBObj;
+    public GameObject RBObj;
     private Transform RBTran;
 
 
@@ -13,14 +13,14 @@ public class GameManager : MonoBehaviour {
     {
         if (Instance != null)
         {
-            Debug.Log("PauseUI is already in play. Deleting old Instantiating new.");
+            Debug.Log("Game Manager is already in play. Deleting old Instantiating new.");
             Destroy(gameObject);
         }
         else
             Instance = this;
-
-
-        RBTran = RBObj;
+        
+        RBObj = Resources.Load("Prefabs/RollerBall", typeof(GameObject)) as GameObject;
+        RBTran = RBObj.transform.GetComponent<Transform>();
         BallNew();
     }
 
@@ -28,13 +28,15 @@ public class GameManager : MonoBehaviour {
     {
         Destroy(RBTran.gameObject);
         RBTran = null;
-        RBTran = RBObj;
+        RBTran = RBObj.transform;
         BallNew();
     }
 
     public void BallNew()
     {
-        RBTran = (Transform)Instantiate(RBObj, new Vector3(0, 0, 0), Quaternion.identity);
-        RBTran.gameObject.SetActive(true);
+        RBTran = Instantiate(RBObj, new Vector3(0, 0, 0), Quaternion.identity) as Transform;
+        
+        //if(!RBTran.gameObject.activeInHierarchy)
+        //  RBTran.gameObject.SetActive(true);
     }
 }

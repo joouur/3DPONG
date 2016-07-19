@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace Pong.UI
@@ -43,7 +44,7 @@ namespace Pong.UI
 
         }
 
-        public void Pause()
+        private void Pause()
         {
             PauseMenu.enabled = !PauseMenu.enabled;
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
@@ -51,16 +52,16 @@ namespace Pong.UI
             
         }
 
-        public void Options()
-        {
-            OptionsMenu.enabled = !OptionsMenu.enabled;
-            MainMenu.enabled = !MainMenu.enabled;
-        }
-
         private void FalseIt()
         {
             MainMenu.enabled = false;
             OptionsMenu.enabled = false;
+        }
+
+        public void Options()
+        {
+            OptionsMenu.enabled = !OptionsMenu.enabled;
+            MainMenu.enabled = !MainMenu.enabled;
         }
     }
 }

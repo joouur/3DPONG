@@ -13,6 +13,13 @@ public class Ball : MonoBehaviour {
     public float magnitude;
     private Vector3 grav;
     public float maxAngularSpeed;
+
+    //Audio
+    private AudioSource ballAudio;
+
+    private PaddleContact playerContact;
+    private PaddleContact enemyContact;
+
     public void Start()
     {
         BallRb = GetComponent<Rigidbody>();
@@ -24,6 +31,14 @@ public class Ball : MonoBehaviour {
         BallRb.AddRelativeTorque(Vector3.one);
         BallRb.velocity = new Vector3(0, startSpeed, 0);
         grav = new Vector3(0, -9.81f, 0);
+
+        playerContact = GameObject.FindGameObjectWithTag("Player").GetComponent<PaddleContact>();
+        enemyContact = GameObject.FindGameObjectWithTag("Enemy").GetComponent<PaddleContact>();
+
+        playerContact.ball = this;
+        enemyContact.ball = this;
+
+        ballAudio = GetComponent<AudioSource>() as AudioSource;
     }
     // Update is called once per frame
     public void FixedUpdate()
@@ -38,7 +53,14 @@ public class Ball : MonoBehaviour {
         if (other.collider.tag == "Player" || other.collider.tag == "Enemy")
         {
             if (other.collider.tag == "Player")
+            {
                 ScoreUI.Instance.SetBounces();
+                ColSound(0, AudioManager.Instance.soundVolume);    
+            }
+            else
+            {
+                ColSound(1, (int)(AudioManager.Instance.soundVolume * 0.75f));
+            }
             Physics.gravity = grav;
             grav = grav * -1.0f;
             speed = BallRb.velocity;
@@ -53,5 +75,14 @@ public class Ball : MonoBehaviour {
             magnitude = BallRb.velocity.magnitude;
             ScoreUI.Instance.SetSpeed(magnitude);
         }
+        else
+        {
+            ColSound(2, 80);
+        }
+    }
+
+    public void ColSound(int i, int v)
+    {
+        ballAudio.PlayOneShot(AudioManager.ballAudioClips.ballCollision[i], v / 100f);
     }
 }

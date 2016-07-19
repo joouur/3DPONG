@@ -28,7 +28,7 @@ namespace Pong.UI
             aScore = 0;
             if (Instance != null)
             {
-                Debug.Log("PauseUI is already in play. Deleting old Instantiating new.");
+                Debug.Log("ScoreUI is already in play. Deleting old Instantiating new.");
                 Destroy(gameObject);
             }
             else

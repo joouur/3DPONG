@@ -11,6 +11,8 @@ GameObject:
   - 114: {fileID: 11413140}
   - 114: {fileID: 11423818}
   - 114: {fileID: 11474092}
+  - 114: {fileID: 11450978}
+  - 82: {fileID: 8217144}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -60,6 +62,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 453670}
   m_RootOrder: 0
+--- !u!82 &8217144
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150768}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11407674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b9dbe38586c9c489557beb4b59a1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RBObj: {fileID: 486070, guid: bb546057a0e653a42bbdb95c61b6329a, type: 2}
+  RBObj: {fileID: 0}
 --- !u!114 &11423818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +194,20 @@ MonoBehaviour:
   PauseMenu: {fileID: 0}
   MainMenu: {fileID: 0}
   OptionsMenu: {fileID: 0}
+--- !u!114 &11450978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146cdbc9562021479f9844a592a8231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 0
+  musicVolume: 0
+  soundVolume: 0
 --- !u!114 &11474092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayUI: {fileID: 0}
+  bounces: 0
   pScore: 0
   aScore: 0
 --- !u!1001 &100100000

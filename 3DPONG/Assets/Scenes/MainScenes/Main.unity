@@ -310,23 +310,23 @@ Prefab:
       objectReference: {fileID: 1899285343}
     - target: {fileID: 22430292, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22430292, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467194, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467194, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22467194, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22481302, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.x
@@ -350,23 +350,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22456300, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 22456300, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22490354, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 22490354, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 22490354, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11402348, guid: 3a4152d7ecee3384098cecc52cfedfc6, type: 2}
       propertyPath: m_Value

@@ -76,6 +76,11 @@ public class AudioManager : MonoBehaviour {
             PlayClip(playMS);
             audioSource.Play();
         }
+        if (playMS)
+            PlayClip(playMS);
+        else
+            PlayClip(playMS);
+
     }
 
     #region Volume
@@ -103,17 +108,18 @@ public class AudioManager : MonoBehaviour {
         if (allSongs(songs))
         {
             songs = new bool[musicAudioClips.playList.Length];
-            Playlist();
+            //Debug.Log(string.Format("{0} {1} {2}", songs[0], songs[1], songs[2]));
         }
         else
         {
-            if (songs[i])
-                Playlist();
-            else
-                songs[i] = true;
+            while (songs[i] == true) {
+                i = UnityEngine.Random.Range(0, musicAudioClips.playList.Length);
+            }
+            songs[i] = true;
         }
-        AudioClip a = musicAudioClips.playList[UnityEngine.Random.Range(0, musicAudioClips.playList.Length)] as AudioClip;
+        AudioClip a = musicAudioClips.playList[i] as AudioClip;
         return a;
+
     }
     
     public AudioClip AmbientMu()
@@ -122,32 +128,26 @@ public class AudioManager : MonoBehaviour {
         if (allSongs(ambient))
         {
             ambient = new bool[musicAudioClips.ambient.Length];
-            AmbientMu();
+            //Debug.Log(string.Format("{0} {1} {2}", songs[0], songs[1], songs[2]));
         }
         else
         {
-            if (ambient[i])
-                AmbientMu();
-            else
-                ambient[i] = true;
+            while (ambient[i] == true)
+            {
+                i = UnityEngine.Random.Range(0, musicAudioClips.ambient.Length);
+            }
+            ambient[i] = true;
         }
-        AudioClip a = musicAudioClips.ambient[UnityEngine.Random.Range(0, musicAudioClips.ambient.Length)] as AudioClip;
+        AudioClip a = musicAudioClips.ambient[i] as AudioClip;
         return a;
     }
 
     public void PlayClip(bool pL)
     {
-        if (pL)
-        {
-            audioSource.clip = Playlist();
-            playMS = true;
-        }
-        else
-        {
-            audioSource.clip = AmbientMu();
-            playMS = false;
-        }
+        playMS = pL;
+        //PlayClip();
     }
+
     public void PlayClip()
     {
         if (playMS)

@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3333370}
   - 23: {fileID: 2318854}
   m_Layer: 0
-  m_Name: FloorPrototype08x01x08 (3)
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3387924}
   - 23: {fileID: 2315750}
   m_Layer: 0
-  m_Name: FloorPrototype08x01x08 (2)
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,8 @@ GameObject:
   - 4: {fileID: 474062}
   - 33: {fileID: 3328976}
   - 23: {fileID: 2307642}
-  m_Layer: 8
-  m_Name: Hidden
+  m_Layer: 0
+  m_Name: FloorBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +76,8 @@ GameObject:
   - 4: {fileID: 479968}
   - 33: {fileID: 3316804}
   - 23: {fileID: 2384846}
-  m_Layer: 0
-  m_Name: FloorPrototype08x01x08
+  m_Layer: 8
+  m_Name: Hidden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

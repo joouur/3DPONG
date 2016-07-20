@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pong.UI;
 
 public class Ball : MonoBehaviour {
 
     public Vector3 speed;
+    public Vector3 vel;
     public float startSpeed;
     [HideInInspector]
     public Rigidbody BallRb;
@@ -11,6 +13,13 @@ public class Ball : MonoBehaviour {
     public float magnitude;
     private Vector3 grav;
     public float maxAngularSpeed;
+
+    //Audio
+    private AudioSource ballAudio;
+
+    private PaddleContact playerContact;
+    private PaddleContact enemyContact;
+
     public void Start()
     {
         BallRb = GetComponent<Rigidbody>();
@@ -22,40 +31,58 @@ public class Ball : MonoBehaviour {
         BallRb.AddRelativeTorque(Vector3.one);
         BallRb.velocity = new Vector3(0, startSpeed, 0);
         grav = new Vector3(0, -9.81f, 0);
+
+        playerContact = GameObject.FindGameObjectWithTag("Player").GetComponent<PaddleContact>();
+        enemyContact = GameObject.FindGameObjectWithTag("Enemy").GetComponent<PaddleContact>();
+
+        playerContact.ball = this;
+        enemyContact.ball = this;
+
+        ballAudio = GetComponent<AudioSource>() as AudioSource;
     }
     // Update is called once per frame
     public void FixedUpdate()
     {
-        Ray ray = new Ray(this.gameObject.transform.position, BallRb.velocity * 15.0f);
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit))
-        {
-            if(hit.collider.tag =="Player" || hit.collider.tag == "Enemy")
-            {
-                //transform.Rotate(Vector3.one);
-                speed = BallRb.velocity;
-                if (!(BallRb.velocity.magnitude > 90))
-                {
-                    speed *= 1.025f;
-                    //Debug.Log(BallRb.velocity.magnitude);
-                }
-                magnitude = BallRb.velocity.magnitude;
-            }
-        }
-        
+        magnitude = BallRb.velocity.magnitude;
+        ScoreUI.Instance.SetSpeed(magnitude);
     }
 
-    private void Movement(Vector3 m, Vector3 u)
-    {
-    }
 
     public void OnCollisionEnter(Collision other)
     {
         if (other.collider.tag == "Player" || other.collider.tag == "Enemy")
         {
+            if (other.collider.tag == "Player")
+            {
+                ScoreUI.Instance.SetBounces();
+                ColSound(0, AudioManager.Instance.soundVolume);    
+            }
+            else
+            {
+                ColSound(1, (int)(AudioManager.Instance.soundVolume * 0.75f));
+            }
             Physics.gravity = grav;
             grav = grav * -1.0f;
+            speed = BallRb.velocity;
+            if (!(BallRb.velocity.magnitude > 100))
+            {
+                speed *= 1.025f;
+                //Debug.Log(BallRb.velocity.magnitude);
+                BallRb.velocity = speed;
+
+            }
+            vel = BallRb.velocity;
+            magnitude = BallRb.velocity.magnitude;
+            ScoreUI.Instance.SetSpeed(magnitude);
         }
+        else
+        {
+            ColSound(2, 80);
+        }
+    }
+
+    public void ColSound(int i, int v)
+    {
+        ballAudio.PlayOneShot(AudioManager.ballAudioClips.ballCollision[i], v / 100f);
     }
 }

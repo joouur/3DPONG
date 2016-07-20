@@ -6,18 +6,22 @@ public class PaddleController : MonoBehaviour {
     public float speed = 40f;
     float translationX; // movement of paddle in x direction
     float translationY; // movement of paddle in y direction
-    public float translationThrust;
-    public float negXBound = -3.975f;
-    public float posXBound = 4f;
-    public float negZBound = -3.246f;
-    public float posZBound = 3.17f;
+    public float translationThrust = 10f;
+    public float paddleHome = 24.01f;
+    public float negXBound = -3.96f;
+    public float posXBound = 3.993f;
+    public float negZBound = -3.21f;
+    public float posZBound = 3.21f;
     public float smoothFactor = 0.3f;
     private Vector3 velocity = Vector3.zero;
     private Rigidbody pdRb;
     private Vector3 startPause;
+    public float thrustSpeed = 1.7f;
+    public bool thrustEnabled = true;
+    //public bool thrustKey = Input.GetMouseButtonDown(0);
 	// Use this for initialization
 	void Start () {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         pdRb = GetComponent<Rigidbody>();
         GetComponent<Rigidbody>().isKinematic = true;
         //gameObject.GetComponent<Renderer>().material.color = 0;
@@ -26,26 +30,33 @@ public class PaddleController : MonoBehaviour {
 	
     IEnumerator thrust()
     {
-        /*
-        if (startPause.y + translationThrust <= transform.position.y)
-            pdRb.MovePosition(Vector3.down + transform.position * 4.0f * Time.deltaTime);
-
-        else
-            yield return null; 
-        */
-
-        //Vector3 pos = transform.position;
-        //pos.y += translationThrust;
-        //pos.y = Mathf.Clamp(pos.x + translationThrust, 18, 24);
-        //transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * .5f);
-
-        //pdRb.AddRelativeForce(Vector3.down * translationThrust, ForceMode.Impulse);
+        thrustEnabled = false;
         Vector3 pos = transform.position;
-        //pos.y = Mathf.Clamp(pos.y + translationThrust, 24f, 18f);
-        pos.y += translationThrust*1.2f;
+        //pos.y = Mathf.Clamp(pos.y - translationThrust*thrustSpeed, 24.01f, 21f);
+        pos.y += translationThrust*thrustSpeed;
         pdRb.MovePosition(transform.position - pos * Time.deltaTime);
+        //new WaitForSeconds(4);
+        //pos.y -= translationThrust * thrustSpeed;
+        //pdRb.MovePosition(transform.position + pos * Time.deltaTime);
+        //StartCoroutine("returnFromThrust");
         yield return new WaitForEndOfFrame();
     }
+    
+    IEnumerator returnFromThrust()
+    {
+        
+        Vector3 pos = transform.position;
+        //pos.y = Mathf.Clamp(pos.y - translationThrust, 24.01f, 18f);
+        //pos.y -= translationThrust * thrustSpeed; 
+        //pos.y = 24.01f;
+        pos.y -= translationThrust * thrustSpeed;
+        pdRb.MovePosition(transform.position + pos * Time.deltaTime);
+        new WaitForSeconds(10);
+        thrustEnabled = true;
+        StopAllCoroutines();
+        yield return new WaitForEndOfFrame();
+    }
+    
 	// Update is called once per frame
 	void Update () {
         //these two translations get the mouse position and multiply it by a set speed
@@ -57,8 +68,11 @@ public class PaddleController : MonoBehaviour {
         translationY =  mouseY * speed;
         translationX *= Time.deltaTime;
         translationY *= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
-            StartCoroutine("thrust");
+        if (Input.GetMouseButtonDown(0) && thrustEnabled)
+        {
+            StartCoroutine("thrust");   
+        }
+            
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
         pos.z = Mathf.Clamp(pos.z + translationY, negZBound, posZBound);

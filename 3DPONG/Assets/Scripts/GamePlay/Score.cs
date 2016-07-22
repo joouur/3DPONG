@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Pong.UI;
+using Pong.Managers;
 
-namespace Pong.UI
+namespace Pong.Gameplay
 {
     public class Score : MonoBehaviour
     {
         public bool plOrAI;
 
-
-        public void OnTriggerEnter()
+        public void OnTriggerEnter(Collider other)
         {
-            if (plOrAI)
+            if (other.tag == "Ball")
             {
-                ScoreUI.Instance.pScore++;
-                ScoreUI.Instance.ScorePlayer();
+                if (plOrAI)
+                {
+                    ScoreUI.Instance.pScore++;
+                    ScoreUI.Instance.ScorePlayer();
+                }
+                else
+                {
+                    ScoreUI.Instance.aScore++;
+                    ScoreUI.Instance.ScoreAI();
+                }
+                GameManager.Instance.BallReset();
             }
-            else
-            {
-                ScoreUI.Instance.aScore++;
-                ScoreUI.Instance.ScoreAI();
-            }
-            GameManager.Instance.BallReset();
         }
     }
 }

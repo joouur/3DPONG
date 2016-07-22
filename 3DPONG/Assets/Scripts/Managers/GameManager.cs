@@ -1,42 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
-
-    public static GameManager Instance;
-
-    public GameObject RBObj;
-    private Transform RBTran;
-
-
-    public void Awake()
+namespace Pong.Managers
+{
+    public class GameManager : MonoBehaviour
     {
-        if (Instance != null)
+
+        public static GameManager Instance;
+
+        private GameObject RBObj;
+        private GameObject RBTran;
+
+
+        public void Awake()
         {
-            Debug.Log("Game Manager is already in play. Deleting old Instantiating new.");
-            Destroy(gameObject);
+            if (Instance != null)
+            {
+                Debug.Log("Game Manager is already in play. Deleting old Instantiating new.");
+                Destroy(gameObject);
+            }
+            else
+                Instance = this;
+
+            RBObj = Resources.Load("Prefabs/RollerBall", typeof(GameObject)) as GameObject;
+            BallNew();
         }
-        else
-            Instance = this;
-        
-        RBObj = Resources.Load("Prefabs/RollerBall", typeof(GameObject)) as GameObject;
-        RBTran = RBObj.transform.GetComponent<Transform>();
-        BallNew();
-    }
 
-    public void BallReset()
-    {
-        Destroy(RBTran.gameObject);
-        RBTran = null;
-        RBTran = RBObj.transform;
-        BallNew();
-    }
+        public void BallReset()
+        {
+            Destroy(RBTran.gameObject);
+            RBTran = null;
+            BallNew();
+        }
 
-    public void BallNew()
-    {
-        RBTran = Instantiate(RBObj, new Vector3(0, 0, 0), Quaternion.identity) as Transform;
-        
-        //if(!RBTran.gameObject.activeInHierarchy)
-        //  RBTran.gameObject.SetActive(true);
+        public void BallNew()
+        {
+            if (!RBTran)
+                RBTran = Instantiate(RBObj, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            else
+                Debug.Log("There is a main Ball in play.");
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using Pong.UI;
+using Pong.Managers;
 
 namespace Pong.UI
 {
@@ -21,7 +21,7 @@ namespace Pong.UI
         public int aScore;
         private float playTime;
 
-        private static int delay = 1;
+        private static int delay = 10;
         // Use this for initialization
         public void Start()
         {
@@ -49,6 +49,7 @@ namespace Pong.UI
             else
                 Instance = this;
         }
+
         public void ScorePlayer()
         {
             PlayerScore.text = pScore.ToString();
@@ -79,31 +80,34 @@ namespace Pong.UI
             }
         }
 
+        private string s;
+
         public IEnumerator SongNames()
         {
             int i = 0;
-            int j = 13;
+            //int j = 10;
             while (true)
             {
-                string s = AudioManager.Instance.GetSongName();
-                string temp = s;
-                SongName.text = temp.Substring(i, j).ToString();
-                i++;
-                j++;
-                Debug.Log(string.Format("i = {0}, j = {1}", i, j));
-                if (j >= temp.Length)
+                if (s != AudioManager.Instance.GetSongName())
                 {
-                    j = s.Length - j;
-                    Debug.Log(string.Format("in j, i = {0}, j = {1}", i, j));
-
+                    s = AudioManager.Instance.GetSongName();
+                    i = 0;
                 }
-                if (i >= temp.Length)
+                if (s.Length <= 16)
+                    SongName.text = s;
+                else
+                {
+                    SongName.text = s.Substring(i, 14).ToString();
+                    //Debug.Log(string.Format("in i, i = {0}, length = {1}", i, s.Length));
+                    if (i == s.Length - 13)
+                        i = 0;
+                }
+                i++;
+                if (i == s.Length - 13)
                 {
                     i = 0;
-                    Debug.Log(string.Format("in i, i = {0}, j = {1}", i, j));
-
                 }
-                yield return new WaitForSeconds(delay);
+                yield return new WaitForSeconds(Time.deltaTime * delay);
             }
         }
     }

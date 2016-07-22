@@ -77,7 +77,7 @@ namespace Pong.Gameplay
             }
             else
             {
-                ColSound(2, 80);
+                ColSound(2, (int)(AudioManager.Instance.soundVolume * 0.5f));
             }
         }
 

@@ -13,9 +13,13 @@ namespace Pong.Managers
         public static BallAudioClips ballAudioClips;
         public static MusicAudioClips musicAudioClips;
 
+        [Range(0,100)]
         public int masterVolume;
+        [Range(0,1)]
         public float musicVolume;
+        [Range(0,100)]
         public int soundVolume;
+        private int previousSoundVolume;
 
         private AudioSource audioSource;
 
@@ -94,24 +98,55 @@ namespace Pong.Managers
         }
 
         #region Volume
+
+        /// <summary>
+        /// Deprecated
+        /// </summary>
+        /// <param name="v"></param>
         public void MasterVolumeChange(Slider v)
         {
             masterVolume = Convert.ToInt32(v.value);
             AudioListener.volume = (float)(masterVolume / 100.0f);
         }
 
+        public void MasterVolumeChange(float v)
+        {
+            masterVolume = Convert.ToInt32(v);
+            AudioListener.volume = (float)(masterVolume / 100.0f);
+        }
+
+        /// <summary>
+        /// Deprecated
+        /// </summary>
+        /// <param name="v"></param>
         public void MusicVolumeChange(Slider v)
         {
             musicVolume = v.value;
             audioSource.volume = musicVolume;
         }
 
+        public void MusicVolumeChange(float v)
+        {
+            musicVolume = v;
+            audioSource.volume = musicVolume;
+        }
+
+        /// <summary>
+        /// Deprecated
+        /// </summary>
+        /// <param name="v"></param>
         public void SoundVolumeChange(Slider v)
         {
             soundVolume = Convert.ToInt32(v.value);
         }
+        public void SoundVolumeChange(float v)
+        {
+            soundVolume = Convert.ToInt32(v);
+        }
+
         #endregion
 
+        #region MusicControl
         public AudioClip Playlist()
         {
             int i = UnityEngine.Random.Range(0, musicAudioClips.playList.Length);
@@ -179,6 +214,44 @@ namespace Pong.Managers
                 audioSource.Play();
         }
 
+        public void MuteMasterVolume(bool pd)
+        {
+            //p = !p;
+
+            if (pd)
+                AudioListener.volume = 0;
+            else if (!pd)
+                AudioListener.volume = masterVolume / 100;
+        }
+
+        public void MuteMusicVolume(bool pd)
+        {
+            //p = !p;
+
+            if (pd)
+                audioSource.volume = 0;
+            else if (!pd)
+                audioSource.volume = musicVolume;
+        }
+
+        public void MuteSoundVolume(bool pd)
+        {
+            //p = !p;
+
+            if (pd)
+            {
+                previousSoundVolume = soundVolume;
+                soundVolume = 0;
+            }
+            else if (!pd)
+            {
+                soundVolume = previousSoundVolume;
+            }
+        }
+
+        #endregion
+
+        #region Helper Functions
         public static bool allSongs(bool[] a)
         {
             foreach (bool b in a)
@@ -202,6 +275,7 @@ namespace Pong.Managers
                 return audioSource.clip.name;
             }
         }
+        #endregion
     }
 
     public struct BallAudioClips

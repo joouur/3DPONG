@@ -93,10 +93,14 @@ namespace Pong.UI
                     s = AudioManager.Instance.GetSongName();
                     i = 0;
                 }
-                if (s.Length <= 16)
+                if (s.Length <= 20)
+                {
                     SongName.text = s;
+                    SongName.resizeTextForBestFit = true;
+                }
                 else
                 {
+                    SongName.resizeTextForBestFit = false;
                     SongName.text = s.Substring(i, 14).ToString();
                     //Debug.Log(string.Format("in i, i = {0}, length = {1}", i, s.Length));
                     if (i == s.Length - 13)

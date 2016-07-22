@@ -18,6 +18,7 @@ namespace Pong.Gameplay
 
         public void OnCollisionEnter(Collision other)
         {
+
             if (other.gameObject.name == "RollerBall")
             {
                 ball.BallRb.velocity = compVelocity(-other.contacts[0].normal, ball.speed);
@@ -29,6 +30,7 @@ namespace Pong.Gameplay
                         ball.BallRb.velocity = -compVelocity(-other.contacts[0].normal, ball.speed);
         */
             }
+
         }
 
         public Vector3 compVelocity(Vector3 normal, Vector3 velo)

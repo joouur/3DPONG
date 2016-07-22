@@ -11,7 +11,6 @@ namespace Pong.UI
         public Canvas PauseMenu;
         public Canvas MainMenu;
         public Canvas OptionsMenu;
-        private bool paused;
 
         void Start()
         {
@@ -27,7 +26,6 @@ namespace Pong.UI
             MainMenu.enabled = false;
             OptionsMenu.enabled = false;
             //OptionsMenu.enabled = false;
-            paused = false;
         }
 
         // Update is called once per frame

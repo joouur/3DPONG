@@ -16,7 +16,7 @@ public class PaddleController : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     private Rigidbody pdRb;
     private Vector3 startPause;
-    public float thrustSpeed = 1.7f;
+    public float thrustSpeed = 1.2f;
     public bool thrustEnabled = true;
     //public bool thrustKey = Input.GetMouseButtonDown(0);
 	// Use this for initialization
@@ -30,11 +30,11 @@ public class PaddleController : MonoBehaviour {
 	
     IEnumerator thrust()
     {
-        thrustEnabled = false;
-        Vector3 pos = transform.position;
+        //thrustEnabled = false;
+        //Vector3 pos = transform.position;
         //pos.y = Mathf.Clamp(pos.y - translationThrust*thrustSpeed, 24.01f, 21f);
-        pos.y += translationThrust*thrustSpeed;
-        pdRb.MovePosition(transform.position - pos * Time.deltaTime);
+        //pos.y += translationThrust*thrustSpeed;
+        pdRb.AddForce(Vector3.down*Time.deltaTime*thrustSpeed);
         //new WaitForSeconds(4);
         //pos.y -= translationThrust * thrustSpeed;
         //pdRb.MovePosition(transform.position + pos * Time.deltaTime);
@@ -42,25 +42,13 @@ public class PaddleController : MonoBehaviour {
         yield return new WaitForEndOfFrame();
     }
     
-    IEnumerator returnFromThrust()
-    {
-        
-        Vector3 pos = transform.position;
-        //pos.y = Mathf.Clamp(pos.y - translationThrust, 24.01f, 18f);
-        //pos.y -= translationThrust * thrustSpeed; 
-        //pos.y = 24.01f;
-        pos.y -= translationThrust * thrustSpeed;
-        pdRb.MovePosition(transform.position + pos * Time.deltaTime);
-        new WaitForSeconds(10);
-        thrustEnabled = true;
-        StopAllCoroutines();
-        yield return new WaitForEndOfFrame();
-    }
+    
     
 	// Update is called once per frame
 	void Update () {
         //these two translations get the mouse position and multiply it by a set speed
         //it is then multiplied by timedelta and then the translation is made.
+        Vector3 pos = transform.position;
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
         
@@ -68,12 +56,12 @@ public class PaddleController : MonoBehaviour {
         translationY =  mouseY * speed;
         translationX *= Time.deltaTime;
         translationY *= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && thrustEnabled)
+        if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine("thrust");   
+            StartCoroutine("thrust");
         }
             
-        Vector3 pos = transform.position;
+        
         pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
         pos.z = Mathf.Clamp(pos.z + translationY, negZBound, posZBound);
         //transform.position = Vector3.SmoothDamp(transform.position, pos, ref speed, smoothFactor);

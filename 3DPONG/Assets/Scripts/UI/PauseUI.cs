@@ -49,7 +49,7 @@ namespace Pong.UI
             PauseMenu.enabled = !PauseMenu.enabled;
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
             MainMenu.enabled = !MainMenu.enabled;
-            
+            //AudioListener.pause = !AudioListener.pause;
         }
 
         private void FalseIt()

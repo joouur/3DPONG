@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Pong.UI;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour {
@@ -25,7 +26,7 @@ public class AudioManager : MonoBehaviour {
     {
         //Allocate clip arrays
         ballAudioClips.ballCollision = new AudioClip[3];
-        musicAudioClips.playList = new AudioClip[3];
+        musicAudioClips.playList = new AudioClip[8];
         musicAudioClips.ambient = new AudioClip[4];
 
         songs = new bool[musicAudioClips.playList.Length];
@@ -38,6 +39,11 @@ public class AudioManager : MonoBehaviour {
         musicAudioClips.playList[0] = Resources.Load("Audio/AmbientSound/ActualSongs/Cartoon feat. Jüri Pootsmann - I Remember U") as AudioClip;
         musicAudioClips.playList[1] = Resources.Load("Audio/AmbientSound/ActualSongs/Major Look - Legacy (feat. Alex Phillips)") as AudioClip;
         musicAudioClips.playList[2] = Resources.Load("Audio/AmbientSound/ActualSongs/Lupe Fiasco - Daydreamin") as AudioClip;
+        musicAudioClips.playList[3] = Resources.Load("Audio/AmbientSound/ActualSongs/Illenium - Afterlife (feat. ECHOS)") as AudioClip;
+        musicAudioClips.playList[4] = Resources.Load("Audio/AmbientSound/ActualSongs/Illenium - Sleepwalker (feat. Joni Fatora)") as AudioClip;
+        musicAudioClips.playList[5] = Resources.Load("Audio/AmbientSound/ActualSongs/M.I.A. - Bring The Noize (Official Video)") as AudioClip;
+        musicAudioClips.playList[6] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - No No No") as AudioClip;
+        musicAudioClips.playList[7] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - The Calling (feat. Laura Brehm)") as AudioClip;
 
         musicAudioClips.ambient[0] = Resources.Load("Audio/AmbientSound/bennybomstaerk - b39 bibbeat number 8") as AudioClip;
         musicAudioClips.ambient[1] = Resources.Load("Audio/AmbientSound/bennybomstaerk - Fourteenth of September (adapted C-major)") as AudioClip;
@@ -46,6 +52,7 @@ public class AudioManager : MonoBehaviour {
 
         audioSource.clip = musicAudioClips.ambient[UnityEngine.Random.Range(0, musicAudioClips.ambient.Length)] as AudioClip;
         audioSource.Play();
+        ScoreUI.Instance.StartCoroutine(ScoreUI.Instance.SongNames());
     }
 
     public void Awake()
@@ -59,10 +66,10 @@ public class AudioManager : MonoBehaviour {
         {
             Instance = this;
         }
+
         audioSource = GetComponent<AudioSource>();
         playMS = false;
         p = false;
-
         masterVolume = 100;
         musicVolume = 0.50f;
         soundVolume = 75;
@@ -76,6 +83,11 @@ public class AudioManager : MonoBehaviour {
             PlayClip(playMS);
             audioSource.Play();
         }
+        if (playMS)
+            PlayClip(playMS);
+        else
+            PlayClip(playMS);
+
     }
 
     #region Volume
@@ -103,17 +115,18 @@ public class AudioManager : MonoBehaviour {
         if (allSongs(songs))
         {
             songs = new bool[musicAudioClips.playList.Length];
-            Playlist();
+            //Debug.Log(string.Format("{0} {1} {2}", songs[0], songs[1], songs[2]));
         }
         else
         {
-            if (songs[i])
-                Playlist();
-            else
-                songs[i] = true;
+            while (songs[i] == true) {
+                i = UnityEngine.Random.Range(0, musicAudioClips.playList.Length);
+            }
+            songs[i] = true;
         }
-        AudioClip a = musicAudioClips.playList[UnityEngine.Random.Range(0, musicAudioClips.playList.Length)] as AudioClip;
+        AudioClip a = musicAudioClips.playList[i] as AudioClip;
         return a;
+
     }
     
     public AudioClip AmbientMu()
@@ -122,38 +135,34 @@ public class AudioManager : MonoBehaviour {
         if (allSongs(ambient))
         {
             ambient = new bool[musicAudioClips.ambient.Length];
-            AmbientMu();
+            //Debug.Log(string.Format("{0} {1} {2}", songs[0], songs[1], songs[2]));
         }
         else
         {
-            if (ambient[i])
-                AmbientMu();
-            else
-                ambient[i] = true;
+            while (ambient[i] == true)
+            {
+                i = UnityEngine.Random.Range(0, musicAudioClips.ambient.Length);
+            }
+            ambient[i] = true;
         }
-        AudioClip a = musicAudioClips.ambient[UnityEngine.Random.Range(0, musicAudioClips.ambient.Length)] as AudioClip;
+        AudioClip a = musicAudioClips.ambient[i] as AudioClip;
         return a;
     }
 
     public void PlayClip(bool pL)
     {
-        if (pL)
-        {
-            audioSource.clip = Playlist();
-            playMS = true;
-        }
-        else
-        {
-            audioSource.clip = AmbientMu();
-            playMS = false;
-        }
+        if (pL != playMS)
+            playMS = pL;
     }
+
     public void PlayClip()
     {
         if (playMS)
             audioSource.clip = Playlist();
         else
             audioSource.clip = AmbientMu();
+        //Debug.Log(audioSource.clip.name);
+
     }
 
     public void PauseAudio()
@@ -174,6 +183,20 @@ public class AudioManager : MonoBehaviour {
                 return false;
         }
         return true;
+    }
+
+    public string GetSongName()
+    {
+        if (audioSource.clip.name == null)
+        {
+            //Debug.Log("Runnning null");
+            return "Waiting for Audio.";
+        }
+        else
+        {
+            //Debug.Log("Runnning with name: " + audioSource.clip.name);
+            return audioSource.clip.name;
+        }
     }
 }
 

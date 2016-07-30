@@ -25,7 +25,7 @@ namespace Pong.Managers
 
         public bool playMS;
         private bool p;
-
+        public bool muteOnStart;
         private bool[] songs;
         private bool[] ambient;
 
@@ -60,6 +60,10 @@ namespace Pong.Managers
             audioSource.clip = musicAudioClips.ambient[UnityEngine.Random.Range(0, musicAudioClips.ambient.Length)] as AudioClip;
             audioSource.Play();
             ScoreUI.Instance.StartCoroutine(ScoreUI.Instance.SongNames());
+            if (muteOnStart)
+            {
+                MuteMasterVolume(true);
+            }
         }
 
         public void Awake()

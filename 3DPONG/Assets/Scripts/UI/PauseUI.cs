@@ -25,6 +25,7 @@ namespace Pong.UI
             PauseMenu.enabled = false;
             MainMenu.enabled = false;
             OptionsMenu.enabled = false;
+            Cursor.visible = !Cursor.visible;
             //OptionsMenu.enabled = false;
         }
 
@@ -46,6 +47,8 @@ namespace Pong.UI
         {
             PauseMenu.enabled = !PauseMenu.enabled;
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+            Cursor.visible = !Cursor.visible;
+
             MainMenu.enabled = !MainMenu.enabled;
             //AudioListener.pause = !AudioListener.pause;
         }

@@ -15,6 +15,7 @@ namespace Pong.Gameplay
 
         public float magnitude;
         private Vector3 grav;
+        private const float outSide = 35.0f;
         public float maxAngularSpeed;
 
         //Audio
@@ -22,7 +23,7 @@ namespace Pong.Gameplay
 
         private PaddleContact playerContact;
         private PaddleContact enemyContact;
-
+       
         public void Awake()
         {
             BallRb = GetComponent<Rigidbody>();
@@ -48,6 +49,21 @@ namespace Pong.Gameplay
         {
             magnitude = BallRb.velocity.magnitude;
             ScoreUI.Instance.SetSpeed(magnitude);
+            if (transform.position.y > outSide || transform.position.y < -outSide)
+            {
+                if (transform.position.y > outSide)
+                {
+                    ScoreUI.Instance.pScore++;
+                    ScoreUI.Instance.ScorePlayer();
+                }
+                else if (transform.position.y < -outSide)
+                {
+                    ScoreUI.Instance.aScore++;
+                    ScoreUI.Instance.ScoreAI();
+                }
+                GameManager.Instance.BallReset();
+
+            }
         }
 
 

@@ -21,6 +21,7 @@ namespace Pong.Gameplay
         private Vector3 startPause;
         public float thrustSpeed = 1.2f;
         public bool thrustEnabled = true;
+        public bool tilt = true;
         Vector3 startPos = new Vector3(-3.75f, 23.98f, 2.8f);
         //public bool thrustKey = Input.GetMouseButtonDown(0);
         // Use this for initialization
@@ -51,6 +52,51 @@ namespace Pong.Gameplay
             thrustEnabled = true;
         }
 
+        IEnumerator forwardTilt()
+        {
+            if (tilt)
+            {
+                transform.Rotate(25f, 0f, 0f);
+                tilt = false;
+            }
+            yield return new WaitForSeconds(1);
+            transform.Rotate(-25f, 0f, 0f);
+            tilt = true; 
+        }
+        IEnumerator backwardTilt()
+        {
+            if (tilt)
+            {
+                transform.Rotate(-25f, 0f, 0f);
+                tilt = false;
+            }
+            yield return new WaitForSeconds(1);
+            transform.Rotate(25f, 0f, 0f);
+            tilt = true;
+        }
+        IEnumerator leftTilt()
+        {
+            if (tilt)
+            {
+                transform.Rotate(0f, 0f, 25f);
+                tilt = false;
+            }
+            yield return new WaitForSeconds(1);
+            transform.Rotate(0f, 0f, -25f);
+            tilt = true;
+        }
+        IEnumerator rightTilt()
+        {
+            if (tilt)
+            {
+                transform.Rotate(0f, 0f, -25f);
+                tilt = false;
+            }
+            yield return new WaitForSeconds(1);
+            transform.Rotate(0f, 0f, 25f);
+            tilt = true;
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -65,10 +111,24 @@ namespace Pong.Gameplay
             translationX *= Time.deltaTime;
             translationY *= Time.deltaTime;
             if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("Mouse Pressed");
+            {     
                 StartCoroutine("thrust");
-                //StartCoroutine("returnFromThrust");
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                StartCoroutine("forwardTilt");
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                StartCoroutine("backwardTilt");
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                StartCoroutine("leftTilt");
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                StartCoroutine("rightTilt");
             }
 
 

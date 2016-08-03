@@ -21,11 +21,14 @@ namespace Pong.Gameplay
         private Vector3 startPause;
         public float thrustSpeed = 1.2f;
         public bool thrustEnabled = true;
+        Vector3 startPos = new Vector3(-3.75f, 23.98f, 2.8f);
         //public bool thrustKey = Input.GetMouseButtonDown(0);
         // Use this for initialization
         void Start()
         {
             //Cursor.visible = false;
+           
+            transform.position = startPos;
             pdRb = GetComponent<Rigidbody>();
             GetComponent<Rigidbody>().isKinematic = true;
             //gameObject.GetComponent<Renderer>().material.color = 0;
@@ -34,19 +37,19 @@ namespace Pong.Gameplay
 
         IEnumerator thrust()
         {
-            //thrustEnabled = false;
-            //Vector3 pos = transform.position;
-            //pos.y = Mathf.Clamp(pos.y - translationThrust*thrustSpeed, 24.01f, 21f);
-            //pos.y += translationThrust*thrustSpeed;
-            pdRb.AddForce(Vector3.down * Time.deltaTime * thrustSpeed);
-            //new WaitForSeconds(4);
-            //pos.y -= translationThrust * thrustSpeed;
-            //pdRb.MovePosition(transform.position + pos * Time.deltaTime);
-            //StartCoroutine("returnFromThrust");
-            yield return new WaitForEndOfFrame();
+            Vector3 pos = new Vector3(0f, -40f, 0f);
+            Vector3 backPos = new Vector3(transform.position.x, startPos.y, transform.position.z);
+            
+            if (thrustEnabled)
+            {
+                pdRb.MovePosition(transform.position + pos * Time.deltaTime);
+                thrustEnabled = false;
+            }
+               
+            yield return new WaitForSeconds(1);
+            pdRb.MovePosition(backPos);
+            thrustEnabled = true;
         }
-
-
 
         // Update is called once per frame
         void Update()
@@ -63,7 +66,9 @@ namespace Pong.Gameplay
             translationY *= Time.deltaTime;
             if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("Mouse Pressed");
                 StartCoroutine("thrust");
+                //StartCoroutine("returnFromThrust");
             }
 
 

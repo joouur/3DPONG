@@ -14,11 +14,14 @@ namespace Pong.Manager
         float translationX;
         float translationZ;
         Transform ball;
+        Vector3 startPos = new Vector3(-3.094f, -24.15f, 2.801f);
         // Use this for initialization
         void Start()
         {
             
             GetComponent<Rigidbody>().isKinematic = true;
+            transform.position = startPos;
+           
         }
 
         // Update is called once per frame

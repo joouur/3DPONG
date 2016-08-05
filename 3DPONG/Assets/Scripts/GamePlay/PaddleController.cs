@@ -60,7 +60,8 @@ namespace Pong.Gameplay
                 tilt = false;
             }
             yield return new WaitForSeconds(1);
-            transform.Rotate(-25f, 0f, 0f);
+            //transform.Rotate(0f, 0f, 0f);
+            transform.rotation = Quaternion.identity;
             tilt = true; 
         }
         IEnumerator backwardTilt()
@@ -71,7 +72,8 @@ namespace Pong.Gameplay
                 tilt = false;
             }
             yield return new WaitForSeconds(1);
-            transform.Rotate(25f, 0f, 0f);
+            //transform.Rotate(0f, 0f, 0f);
+            transform.rotation = Quaternion.identity;
             tilt = true;
         }
         IEnumerator leftTilt()
@@ -82,7 +84,8 @@ namespace Pong.Gameplay
                 tilt = false;
             }
             yield return new WaitForSeconds(1);
-            transform.Rotate(0f, 0f, -25f);
+            //transform.Rotate(0f, 0f, 0f);
+            transform.rotation = Quaternion.identity;
             tilt = true;
         }
         IEnumerator rightTilt()
@@ -93,7 +96,8 @@ namespace Pong.Gameplay
                 tilt = false;
             }
             yield return new WaitForSeconds(1);
-            transform.Rotate(0f, 0f, 25f);
+            //transform.Rotate(0f, 0f, 0f);
+            transform.rotation = Quaternion.identity;
             tilt = true;
         }
 

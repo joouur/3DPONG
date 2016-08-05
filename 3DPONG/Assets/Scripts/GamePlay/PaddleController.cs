@@ -21,7 +21,10 @@ namespace Pong.Gameplay
         private Vector3 startPause;
         public float thrustSpeed = 1.2f;
         public bool thrustEnabled = true;
-        public bool tilt = true;
+        public bool ftilt = true;
+        public bool btilt = true;
+        public bool ltilt = true;
+        public bool rtilt = true;
         Vector3 startPos = new Vector3(-3.75f, 23.98f, 2.8f);
         //public bool thrustKey = Input.GetMouseButtonDown(0);
         // Use this for initialization
@@ -31,6 +34,7 @@ namespace Pong.Gameplay
            
             transform.position = startPos;
             pdRb = GetComponent<Rigidbody>();
+            pdRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             GetComponent<Rigidbody>().isKinematic = true;
             //gameObject.GetComponent<Renderer>().material.color = 0;
             startPause = transform.position;
@@ -54,53 +58,53 @@ namespace Pong.Gameplay
 
         IEnumerator forwardTilt()
         {
-            if (tilt)
+            if (ftilt)
             {
-                transform.Rotate(25f, 0f, 0f);
-                tilt = false;
+                transform.Rotate(25f, 0f, 0f);      
+                ftilt = false;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.7f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
-            tilt = true; 
+            ftilt = true; 
         }
         IEnumerator backwardTilt()
         {
-            if (tilt)
+            if (btilt)
             {
-                transform.Rotate(-25f, 0f, 0f);
-                tilt = false;
+                transform.Rotate(-25f, 0f, 0f);  
+                btilt = false;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.7f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
-            tilt = true;
+            btilt = true;
         }
         IEnumerator leftTilt()
         {
-            if (tilt)
+            if (ltilt)
             {
-                transform.Rotate(0f, 0f, 25f);
-                tilt = false;
+                transform.Rotate(0f, 0f, 25f);  
+                ltilt = false;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.7f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
-            tilt = true;
+            ltilt = true;
         }
         IEnumerator rightTilt()
         {
-            if (tilt)
+            if (rtilt)
             {
-                transform.Rotate(0f, 0f, -25f);
-                tilt = false;
+                transform.Rotate(0f, 0f, -25f);  
+                rtilt = false;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.7f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
-            tilt = true;
+            rtilt = true;
         }
-
+       
         // Update is called once per frame
         void Update()
         {
@@ -115,27 +119,16 @@ namespace Pong.Gameplay
             translationX *= Time.deltaTime;
             translationY *= Time.deltaTime;
             if (Input.GetMouseButtonDown(0))
-            {     
-                StartCoroutine("thrust");
-            }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
+                StartCoroutine("thrust");  
+            if (Input.GetKeyDown(KeyCode.W)) 
                 StartCoroutine("forwardTilt");
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
+            if (Input.GetKeyDown(KeyCode.S)) 
                 StartCoroutine("backwardTilt");
-            }
-            if (Input.GetKeyDown(KeyCode.A))
-            {
+            if (Input.GetKeyDown(KeyCode.A)) 
                 StartCoroutine("leftTilt");
-            }
             if (Input.GetKeyDown(KeyCode.D))
-            {
-                StartCoroutine("rightTilt");
-            }
-
-
+                StartCoroutine("rightTilt"); 
+           
             pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
             pos.z = Mathf.Clamp(pos.z + translationY, negZBound, posZBound);
             //transform.position = Vector3.SmoothDamp(transform.position, pos, ref speed, smoothFactor);

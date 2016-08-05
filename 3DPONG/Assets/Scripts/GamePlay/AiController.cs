@@ -32,6 +32,7 @@ namespace Pong.Manager
             {
                 if (ball.position.y < 0)
                 {
+                    float edgeModifier = Random.Range(0f, 70f);
                     float ballX = ball.position.x;
                     float ballz = ball.position.z;
                     Vector3 pos = transform.position;

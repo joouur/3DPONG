@@ -33,7 +33,7 @@ namespace Pong.Managers
         {
             //Allocate clip arrays
             ballAudioClips.ballCollision = new AudioClip[3];
-            musicAudioClips.playList = new AudioClip[9];
+            musicAudioClips.playList = new AudioClip[11];
             musicAudioClips.ambient = new AudioClip[4];
 
             songs = new bool[musicAudioClips.playList.Length];
@@ -52,7 +52,8 @@ namespace Pong.Managers
             musicAudioClips.playList[6] = Resources.Load("Audio/AmbientSound/ActualSongs/M.I.A. - Bring The Noize") as AudioClip;
             musicAudioClips.playList[7] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - No No No") as AudioClip;
             musicAudioClips.playList[8] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - The Calling (feat. Laura Brehm)") as AudioClip;
-            
+            musicAudioClips.playList[9] = Resources.Load("Audio/AmbientSound/ActualSongs/Tauren Wells - Undefeated feat. KB") as AudioClip;
+            musicAudioClips.playList[10] = Resources.Load("Audio/AmbientSound/ActualSongs/Classified - No Pressure feat. Snoop Dogg") as AudioClip;
 
             musicAudioClips.ambient[0] = Resources.Load("Audio/AmbientSound/bennybomstaerk - b39 bibbeat number 8") as AudioClip;
             musicAudioClips.ambient[1] = Resources.Load("Audio/AmbientSound/bennybomstaerk - Fourteenth of September (adapted C-major)") as AudioClip;

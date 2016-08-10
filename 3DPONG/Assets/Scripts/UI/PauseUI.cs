@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Pong.UI
 {
@@ -52,7 +53,17 @@ namespace Pong.UI
             MainMenu.enabled = !MainMenu.enabled;
             //AudioListener.pause = !AudioListener.pause;
         }
+        
+        public void MenuScene()
+        {
+            SceneManager.LoadScene(0);
+        }
 
+        public void ExitMenu()
+        {
+            Application.Quit();
+        }
+        
         private void FalseIt()
         {
             MainMenu.enabled = false;

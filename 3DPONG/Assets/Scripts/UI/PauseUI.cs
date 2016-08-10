@@ -13,7 +13,8 @@ namespace Pong.UI
         public Canvas MainMenu;
         public Canvas OptionsMenu;
 
-        void Start()
+
+        void Awake()
         {
             if (Instance != null)
             {
@@ -26,6 +27,7 @@ namespace Pong.UI
             PauseMenu.enabled = false;
             MainMenu.enabled = false;
             OptionsMenu.enabled = false;
+
             Cursor.visible = !Cursor.visible;
             //OptionsMenu.enabled = false;
         }
@@ -44,6 +46,8 @@ namespace Pong.UI
 
         }
 
+        
+        
         private void Pause()
         {
             PauseMenu.enabled = !PauseMenu.enabled;

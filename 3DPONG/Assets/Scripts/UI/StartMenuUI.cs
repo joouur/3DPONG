@@ -19,7 +19,7 @@ namespace Pong.UI
 
         private Text SongName;
 
-        void Start()
+        void Awake()
         {
             if (Instance != null)
             {
@@ -40,12 +40,10 @@ namespace Pong.UI
             //anim.SetBool("Start", false);
             //StartCoroutine(StartScreen());
             StartCoroutine(SongNames());
-        }
-        public void Awake()
-        {
             SongName = GameObject.Find("SongName").GetComponent<Text>();
+
         }
-        
+
         public void StartGame()
         {
             SceneManager.LoadScene(1);

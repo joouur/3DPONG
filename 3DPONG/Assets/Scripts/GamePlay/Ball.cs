@@ -61,6 +61,8 @@ namespace Pong.Gameplay
                     ScoreUI.Instance.aScore++;
                     ScoreUI.Instance.ScoreAI();
                 }
+                ScoreUI.Instance.BestOf();
+                
                 GameManager.Instance.BallReset();
 
             }

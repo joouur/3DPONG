@@ -10,35 +10,33 @@ namespace Pong.UI
         public static ScoreUI Instance;
 
         public Canvas PlayUI;
+        public Canvas WinnerScreen;
+
+        private Text Winn;
         private Text PlayerScore;
         private Text AIScore;
         private Text Speed;
         private Text TimeS;
         private Text Bounces;
         private Text SongName;
+        private Text ScoresComplete;
+
         public int bounces;
+
         public int pScore;
         public int aScore;
+        private int fScore;
+
         private float playTime;
 
-        private static int delay = 10;
-        // Use this for initialization
-        public void Start()
-        {
-            pScore = 0;
-            aScore = 0;
-            
-            PlayerScore = GameObject.Find("PlayerScore").GetComponent<Text>();
-            AIScore = GameObject.Find("AIScore").GetComponent<Text>();
-            Speed = GameObject.Find("SpeedT").GetComponent<Text>();
-            TimeS = GameObject.Find("TimeP").GetComponent<Text>();
-            Bounces = GameObject.Find("BounceT").GetComponent<Text>();
-            SongName = GameObject.Find("SongNameT").GetComponent<Text>();
-            playTime = 0.0f;
-            bounces = 0;
-            StartCoroutine(timeSet());
-        }
+        private string C_Score;
+        public int round;
+        public int rA;
+        public int rP;
 
+        private static int delay = 10;
+
+        // Use this for initialization
         public void Awake()
         {
             if (Instance != null)
@@ -48,7 +46,55 @@ namespace Pong.UI
             }
             else
                 Instance = this;
+
+            pScore = 0;
+            aScore = 0;
+            fScore = 0;
+
+            WinnerScreen.enabled = false;
+            PlayerScore = GameObject.Find("PlayerScore").GetComponent<Text>();
+            AIScore = GameObject.Find("AIScore").GetComponent<Text>();
+            Speed = GameObject.Find("SpeedT").GetComponent<Text>();
+            TimeS = GameObject.Find("TimeP").GetComponent<Text>();
+            Bounces = GameObject.Find("BounceT").GetComponent<Text>();
+            SongName = GameObject.Find("SongNameT").GetComponent<Text>();
+            ScoresComplete = GameObject.Find("ScoresTXT").GetComponent<Text>();
+            Winn = GameObject.Find("Winner").GetComponent<Text>();
+
+            C_Score = "";
+            ScoresComplete.text = C_Score;
+            round = 0;
+            rA = 0;
+            rP = 0;
+            playTime = 0.0f;
+            bounces = 0;
+            StartCoroutine(timeSet());
+
+
         }
+
+        
+        void LateUpdate()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                aScore++;
+                ScoreAI();
+
+                BestOf();
+            }
+            else if(Input.GetKeyDown(KeyCode.L))
+            {
+                pScore++;
+                ScorePlayer();
+                BestOf();
+            }
+            else if( Input.GetKeyDown(KeyCode.M))
+            {
+                SetWinner(true);
+            }
+        }
+        
 
         public void ScorePlayer()
         {
@@ -88,6 +134,98 @@ namespace Pong.UI
             }
         }
 
+        private bool fs;
+
+        public void BestOf()
+        {
+            fScore++;
+            if (fScore == 22)
+            {
+                if(aScore == pScore)
+                {
+                    fScore = 20;
+                }
+                else
+                {
+                    if (aScore >= 11)
+                    {
+                        C_Score = C_Score + string.Format("Winner AI {0} - {1} P\n", aScore, pScore);
+                        rA++;
+                    }
+                    else if (pScore >= 11)
+                    {
+                        C_Score = C_Score + string.Format("Winner P {0} - {1} AI\n", pScore, aScore);
+                        rP++;
+                    }
+
+                    if (round >= 4)
+                    {
+                        if (rA > 2)
+                        {
+                            fs = true;
+                        }
+                        else if (rP > 2)
+                        {
+                            fs = false;
+                        }
+                        SetWinner(fs);
+                        ResetScores();
+                    }
+                    else
+                    {
+                        Debug.Log(C_Score);
+                        ScoresComplete.text = C_Score;
+
+                        round++;
+                        aScore = 0;
+                        pScore = 0;
+                        fScore = 0;
+                        ScorePlayer();
+                        ScoreAI();
+                    }
+                }
+            }
+        }
+
+        private string sp;
+
+        public void SetWinner(bool w)
+        {
+            EnableWinner();
+
+            if (w)
+                sp = "Artificial Intelligence!";
+            else if (!w)
+                sp = "PLAYER! (Impressive right?)";
+
+            Winn.text = sp;
+            Time.timeScale = 0;
+            Cursor.visible = true;
+        }
+
+        private void EnableWinner()
+        {
+            WinnerScreen.enabled = !WinnerScreen.enabled;
+        }
+
+        public void ResetScores()
+        {
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+            Cursor.visible = !Cursor.visible;
+
+            EnableWinner();
+            aScore = pScore = fScore = 0;
+            C_Score = "";
+            ScoresComplete.text = C_Score;
+            ScorePlayer();
+            ScoreAI();
+            round = 0;
+            rA = 0;
+            rP = 0;
+            playTime = 0.0f;
+            GameManager.Instance.BallReset();
+        }
+        
         private string s;
 
         public IEnumerator SongNames()

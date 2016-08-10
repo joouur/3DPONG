@@ -17,7 +17,7 @@ namespace Pong.Manager
         bool checkRand = false;
         float lrEdge = 2.18f;
         float udEdge = 1.28f;
-        float edgeSensitivity = 10f;
+        float edgeSensitivity = 20f;
         Transform ball;
         Vector3 startPos = new Vector3(-3.094f, -24.15f, 2.801f);
         // Use this for initialization

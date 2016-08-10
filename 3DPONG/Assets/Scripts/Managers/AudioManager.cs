@@ -43,17 +43,17 @@ namespace Pong.Managers
             ballAudioClips.ballCollision[1] = Resources.Load("Audio/SoundFX/scifi003") as AudioClip;
             ballAudioClips.ballCollision[2] = Resources.Load("Audio/SoundFX/scifi034") as AudioClip;
 
-            musicAudioClips.playList[0] = Resources.Load("Audio/AmbientSound/ActualSongs/Zedd - Transmission feat. Logic") as AudioClip;
-            musicAudioClips.playList[1] = Resources.Load("Audio/AmbientSound/ActualSongs/Cartoon feat. Jüri Pootsmann - I Remember U") as AudioClip;
-            musicAudioClips.playList[2] = Resources.Load("Audio/AmbientSound/ActualSongs/Major Look - Legacy (feat. Alex Phillips)") as AudioClip;
-            musicAudioClips.playList[3] = Resources.Load("Audio/AmbientSound/ActualSongs/Lupe Fiasco - Daydreamin") as AudioClip;
-            musicAudioClips.playList[4] = Resources.Load("Audio/AmbientSound/ActualSongs/Illenium - Afterlife (feat. ECHOS)") as AudioClip;
-            musicAudioClips.playList[5] = Resources.Load("Audio/AmbientSound/ActualSongs/Illenium - Sleepwalker (feat. Joni Fatora)") as AudioClip;
-            musicAudioClips.playList[6] = Resources.Load("Audio/AmbientSound/ActualSongs/M.I.A. - Bring The Noize") as AudioClip;
-            musicAudioClips.playList[7] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - No No No") as AudioClip;
-            musicAudioClips.playList[8] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - The Calling (feat. Laura Brehm)") as AudioClip;
-            musicAudioClips.playList[9] = Resources.Load("Audio/AmbientSound/ActualSongs/Tauren Wells - Undefeated feat. KB") as AudioClip;
-            musicAudioClips.playList[10] = Resources.Load("Audio/AmbientSound/ActualSongs/Classified - No Pressure feat. Snoop Dogg") as AudioClip;
+            musicAudioClips.playList[0] = Resources.Load("Audio/AmbientSound/ActualSongs/Cartoon feat. Jüri Pootsmann - I Remember U") as AudioClip;
+            musicAudioClips.playList[1] = Resources.Load("Audio/AmbientSound/ActualSongs/Major Look - Legacy (feat. Alex Phillips)") as AudioClip;
+            musicAudioClips.playList[2] = Resources.Load("Audio/AmbientSound/ActualSongs/Lupe Fiasco - Daydreamin") as AudioClip;
+            musicAudioClips.playList[3] = Resources.Load("Audio/AmbientSound/ActualSongs/Illenium - Afterlife (feat. ECHOS)") as AudioClip;
+            musicAudioClips.playList[4] = Resources.Load("Audio/AmbientSound/ActualSongs/Illenium - Sleepwalker (feat. Joni Fatora)") as AudioClip;
+            musicAudioClips.playList[5] = Resources.Load("Audio/AmbientSound/ActualSongs/M.I.A. - Bring The Noize") as AudioClip;
+            musicAudioClips.playList[6] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - No No No") as AudioClip;
+            musicAudioClips.playList[7] = Resources.Load("Audio/AmbientSound/ActualSongs/TheFatRat - The Calling (feat. Laura Brehm)") as AudioClip; 
+            musicAudioClips.playList[8] = Resources.Load("Audio/AmbientSound/ActualSongs/Tauren Wells - Undefeated feat. KB") as AudioClip;
+            musicAudioClips.playList[9] = Resources.Load("Audio/AmbientSound/ActualSongs/Classified - No Pressure feat. Snoop Dogg") as AudioClip;
+            musicAudioClips.playList[10] = Resources.Load("Audio/AmbientSound/ActualSongs/Zedd - Transmission feat. Logic") as AudioClip;
 
             musicAudioClips.ambient[0] = Resources.Load("Audio/AmbientSound/bennybomstaerk - b39 bibbeat number 8") as AudioClip;
             musicAudioClips.ambient[1] = Resources.Load("Audio/AmbientSound/bennybomstaerk - Fourteenth of September (adapted C-major)") as AudioClip;

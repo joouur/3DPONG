@@ -35,10 +35,10 @@ namespace Pong.UI
             {
                 anim = panelStart.GetComponent<Animator>();
             }
-            panelStart.SetActive(true);
-            panelEnd.SetActive(false);
-            anim.SetBool("Start", false);
-            StartCoroutine(StartScreen());
+            //panelStart.SetActive(true);
+            panelEnd.SetActive(true);
+            //anim.SetBool("Start", false);
+            //StartCoroutine(StartScreen());
             StartCoroutine(SongNames());
         }
         public void Awake()
@@ -59,6 +59,7 @@ namespace Pong.UI
         
         IEnumerator StartScreen()
         {
+
             yield return new WaitForSeconds(0.5f);
 
             anim.SetBool("Start", true);
@@ -66,7 +67,12 @@ namespace Pong.UI
             panelEnd.SetActive(true);
             panelStart.SetActive(false);
         }
-        
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+
         private string s;
 
         public IEnumerator SongNames()

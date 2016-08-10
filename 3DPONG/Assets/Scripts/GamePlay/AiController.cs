@@ -15,6 +15,9 @@ namespace Pong.Manager
         float translationZ;
         float hitModifier = 0f;
         bool checkRand = false;
+        float lrEdge = 2.18f;
+        float udEdge = 1.28f;
+        float edgeSensitivity = 10f;
         Transform ball;
         Vector3 startPos = new Vector3(-3.094f, -24.15f, 2.801f);
         // Use this for initialization
@@ -42,24 +45,24 @@ namespace Pong.Manager
                 {  
                     if (checkRand)
                     {
-                        hitModifier = Random.Range(30f, 70f);
+                        hitModifier = Random.Range(edgeSensitivity, 70f);
                         checkRand = false;
                         Debug.Log("edgeModifier: " + hitModifier.ToString());
                     }
                     if (hitModifier >60 && hitModifier <= 70)
                     {
                         if (hitModifier > 60 && hitModifier <= 65)
-                            ballX = ball.position.x + 2.2f;
+                            ballX = ball.position.x + lrEdge;
                         else
-                            ballX = ball.position.x - 2.2f;
+                            ballX = ball.position.x - lrEdge;
                         ballz = ball.position.z;
                     }
                     else if (hitModifier > 50 && hitModifier <= 60 )
                     {
                         if (hitModifier > 50 && hitModifier <= 55)
-                            ballz = ball.position.z + 1.3f;
+                            ballz = ball.position.z + udEdge;
                         else
-                            ballz = ball.position.z - 1.3f;
+                            ballz = ball.position.z - udEdge;
                         ballX = ball.position.x;
                     }
                     else

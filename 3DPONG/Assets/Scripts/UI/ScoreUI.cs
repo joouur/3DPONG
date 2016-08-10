@@ -53,10 +53,12 @@ namespace Pong.UI
         public void ScorePlayer()
         {
             PlayerScore.text = pScore.ToString();
+            ResetBounces();
         }
         public void ScoreAI()
         {
             AIScore.text = aScore.ToString();
+            ResetBounces();
         }
         public void SetSpeed(float s)
         {
@@ -66,6 +68,12 @@ namespace Pong.UI
         public void SetBounces()
         {
             bounces++;
+            Bounces.text = bounces.ToString();
+        }
+
+        private void ResetBounces()
+        {
+            bounces = 0;
             Bounces.text = bounces.ToString();
         }
 

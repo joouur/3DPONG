@@ -19,7 +19,7 @@ namespace Pong.Gameplay
         private Vector3 velocity = Vector3.zero;
         private Rigidbody pdRb;
         private Vector3 startPause;
-        public float thrustSpeed = 1.2f;
+        public float thrustSpeed = 1.1f;
         public bool thrustEnabled = true;
         public bool ftilt = true;
         public bool btilt = true;
@@ -54,6 +54,7 @@ namespace Pong.Gameplay
             yield return new WaitForSeconds(1);
             pdRb.MovePosition(backPos);
             thrustEnabled = true;
+            yield return new WaitForEndOfFrame();
         }
 
         IEnumerator forwardTilt()
@@ -106,7 +107,7 @@ namespace Pong.Gameplay
         }
        
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             //these two translations get the mouse position and multiply it by a set speed
             //it is then multiplied by timedelta and then the translation is made.

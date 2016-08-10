@@ -15,7 +15,7 @@ namespace Pong.Manager
         float translationZ;
         float hitModifier = 0f;
         bool checkRand = false;
-        float lrEdge = 2.17f;
+        float lrEdge = 2.13f;
         float udEdge = 1.27f;
         float edgeSensitivity = 20f;
         Transform ball;
@@ -39,7 +39,7 @@ namespace Pong.Manager
                 float ballX;
                 float ballz;   
                     
-               if (ball.position.y > 0 && !checkRand)
+               if (ball.position.y > 2 && !checkRand)
                     checkRand = true;
                 if (ball.position.y < 0)
                 {  

@@ -25,7 +25,7 @@ namespace Pong.Gameplay
         void Awake()
         {
             Bounce = 4;
-            delayed = 10.0f;
+            delayed = 15.0f;
             waitforit = true;
             StartCoroutine(StartPlaying());
         }

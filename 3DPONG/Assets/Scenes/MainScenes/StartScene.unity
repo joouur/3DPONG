@@ -296,6 +296,7 @@ GameObject:
   - 114: {fileID: 631636703}
   - 114: {fileID: 631636705}
   - 82: {fileID: 631636704}
+  - 114: {fileID: 631636706}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -421,6 +422,19 @@ MonoBehaviour:
   OptionsMenu: {fileID: 26957230}
   panelStart: {fileID: 211794973}
   panelEnd: {fileID: 502833376}
+--- !u!114 &631636706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 631636701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df46bc3e1ad4fce45b92203f96d19732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutTexture: {fileID: 2800000, guid: 6057c8185f93306418b6c638d80be66d, type: 3}
+  fadeSpeed: 0.8
 --- !u!1001 &1183572443
 Prefab:
   m_ObjectHideFlags: 0
@@ -644,7 +658,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 174604, guid: 5c9180caa2011a142a751266d32422e7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22491052, guid: 5c9180caa2011a142a751266d32422e7, type: 2}
       propertyPath: m_AnchoredPosition.x

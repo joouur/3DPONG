@@ -51,7 +51,7 @@ namespace Pong.UI
 
         public void StartGame()
         {
-            SceneManager.LoadScene(1);
+            StartCoroutine(FadeInScene.Instance.onChangeLevel(1));
         }
 
         public void Options()

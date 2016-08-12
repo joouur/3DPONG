@@ -68,7 +68,8 @@ namespace Pong.UI
         
         public void MenuScene()
         {
-            SceneManager.LoadScene(0);
+            StartCoroutine(FadeInScene.Instance.onChangeLevel(0));
+            //SceneManager.LoadScene(0);
         }
 
         public void ExitMenu()

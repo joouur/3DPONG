@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2309134}
   - 64: {fileID: 6476896}
   - 114: {fileID: 11454858}
+  - 114: {fileID: 11422472}
   m_Layer: 0
   m_Name: Ramp
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4150963, y: 12.608198, z: -38.247753}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,8 +75,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300002, guid: b9d7ac1a0f551404f8d32e1e02b64325, type: 3}
+--- !u!114 &11422472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3346f9ad5ee93a64e9a31b8603a4a953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 82096aab38f01cb40a1cbf8629a810ba, type: 2}
+  fadeSpeed: 0.8
+  hasRB: 0
 --- !u!114 &11454858
 MonoBehaviour:
   m_ObjectHideFlags: 1

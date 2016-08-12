@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Pong.Manager
+namespace Pong.Gameplay
 {
     public class AiController : MonoBehaviour
     {
@@ -15,51 +15,78 @@ namespace Pong.Manager
         float translationZ;
         float hitModifier = 0f;
         bool checkRand = false;
-        float lrEdge = 2.13f;
+        float lrEdge = 2.11f;
         float udEdge = 1.27f;
-        float edgeSensitivity = 20f;
+        private Rigidbody aiRb;
+        float edgeSensitivity = 20;
+        public float thrustSpeed = 10f;
+        public bool thrustEnabled = false;
+        bool isHit = true;
         Transform ball;
         Vector3 startPos = new Vector3(-3.094f, -24.15f, 2.801f);
         // Use this for initialization
         void Start()
         {
-            
+            aiRb = GetComponent<Rigidbody>();
+            aiRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             GetComponent<Rigidbody>().isKinematic = true;
             transform.position = startPos;
            
         }
+        IEnumerator thrust()
+        {
+            Vector3 pos = new Vector3(0f, 40f, 0f);
+            if (thrustEnabled)
+            {
+                aiRb.MovePosition(transform.position + pos * Time.deltaTime);
+                thrustEnabled = false;
+            }   
+            yield return new WaitForSeconds(0.2f);
+            aiRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
+            thrustEnabled = true;
+        }
+        public void OnCollisionEnter(Collision other)
+        {
 
+            if (other.gameObject.tag == "Ball")
+                isHit = false; 
+        }
         // Update is called once per frame
         void FixedUpdate()
         {
-            ball = GameObject.FindGameObjectWithTag("Ball").transform;
-            if (ball != null)
+            if (ball == null)
+            {
+                ball = GameObject.FindGameObjectWithTag("Ball").transform;
+                hitModifier = Random.Range(edgeSensitivity, 70);
+            }
+            else
             {   //2.2f left and right edge
                 //1.3f up and down edge
                 float ballX;
                 float ballz;   
                     
-               if (ball.position.y > 2 && !checkRand)
+                if (ball.position.y > 2 && !checkRand)
                     checkRand = true;
-                if (ball.position.y < 0)
+                
+                if (ball.position.y < 0 && isHit)
                 {  
                     if (checkRand)
                     {
                         hitModifier = Random.Range(edgeSensitivity, 70f);
                         checkRand = false;
-                        Debug.Log("edgeModifier: " + hitModifier.ToString());
+                        //Debug.Log("edgeModifier: " + hitModifier.ToString());
                     }
-                    if (hitModifier >60 && hitModifier <= 70)
+                    if (hitModifier >60 && hitModifier <= 64)
                     {
-                        if (hitModifier > 60 && hitModifier <= 65)
+                        if (hitModifier <= 62)
                             ballX = ball.position.x + lrEdge;
                         else
                             ballX = ball.position.x - lrEdge;
                         ballz = ball.position.z;
                     }
-                    else if (hitModifier > 50 && hitModifier <= 60 )
+                    else if (hitModifier > 50 && hitModifier <= 54 )
                     {
-                        if (hitModifier > 50 && hitModifier <= 55)
+                        if (hitModifier <= 52)
                             ballz = ball.position.z + udEdge;
                         else
                             ballz = ball.position.z - udEdge;
@@ -74,15 +101,16 @@ namespace Pong.Manager
                     pos.x = Mathf.Clamp(ballX, negXBound, posXBound);
                     pos.z = Mathf.Clamp(ballz, negZBound, posZBound);
                     transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+                    if ((hitModifier >=26 && hitModifier <= 28) && ball.position.y < -22f && thrustEnabled)
+                    {
+                        StartCoroutine("thrust");
+                        Debug.Log("AI says FUCK YOU!!!");
+                    }  
                 }
+                if (ball.position.y > 0)
+                    isHit = true;
             }
-            else
-            {
-                Vector3 pos = transform.position;
-                pos.x = Mathf.Clamp(0.43f, negXBound, posXBound);
-                pos.z = Mathf.Clamp(0.32f, negZBound, posZBound);
-                transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
-            }
+            
              
         }
     }

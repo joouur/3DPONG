@@ -19,7 +19,7 @@ namespace Pong.Gameplay
         private Vector3 velocity = Vector3.zero;
         private Rigidbody pdRb;
         private Vector3 startPause;
-        public float thrustSpeed = 1.1f;
+        public float thrustSpeed = 10f;
         public bool thrustEnabled = true;
         public bool ftilt = true;
         public bool btilt = true;
@@ -42,21 +42,17 @@ namespace Pong.Gameplay
 
         IEnumerator thrust()
         {
-            Vector3 pos = new Vector3(0f, -40f, 0f);
-            Vector3 backPos = new Vector3(transform.position.x, startPos.y, transform.position.z);
-            
+            Vector3 pos = new Vector3(0f, -40f, 0f); 
             if (thrustEnabled)
             {
                 pdRb.MovePosition(transform.position + pos * Time.deltaTime);
                 thrustEnabled = false;
             }
-               
-            yield return new WaitForSeconds(1);
-            pdRb.MovePosition(backPos);
-            thrustEnabled = true;
-            yield return new WaitForEndOfFrame();
+              
+            yield return new WaitForSeconds(0.3f);
+            pdRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
+            thrustEnabled = true;  
         }
-
         IEnumerator forwardTilt()
         {
             if (ftilt)
@@ -64,7 +60,7 @@ namespace Pong.Gameplay
                 transform.Rotate(25f, 0f, 0f);      
                 ftilt = false;
             }
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.2f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
             ftilt = true; 
@@ -76,7 +72,7 @@ namespace Pong.Gameplay
                 transform.Rotate(-25f, 0f, 0f);  
                 btilt = false;
             }
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.2f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
             btilt = true;
@@ -88,7 +84,7 @@ namespace Pong.Gameplay
                 transform.Rotate(0f, 0f, 25f);  
                 ltilt = false;
             }
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.2f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
             ltilt = true;
@@ -100,7 +96,7 @@ namespace Pong.Gameplay
                 transform.Rotate(0f, 0f, -25f);  
                 rtilt = false;
             }
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.2f);
             //transform.Rotate(0f, 0f, 0f);
             transform.rotation = Quaternion.identity;
             rtilt = true;
@@ -120,15 +116,31 @@ namespace Pong.Gameplay
             translationX *= Time.deltaTime;
             translationY *= Time.deltaTime;
             if (Input.GetMouseButtonDown(0))
-                StartCoroutine("thrust");  
-            if (Input.GetKeyDown(KeyCode.W)) 
+            {
+                StartCoroutine("thrust");
+                Debug.Log("MouseClicked");
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
                 StartCoroutine("forwardTilt");
-            if (Input.GetKeyDown(KeyCode.S)) 
+                Debug.Log("UpClicked");
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
                 StartCoroutine("backwardTilt");
-            if (Input.GetKeyDown(KeyCode.A)) 
+                Debug.Log("DownClicked");
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
                 StartCoroutine("leftTilt");
+                Debug.Log("LeftClicked");
+            }
             if (Input.GetKeyDown(KeyCode.D))
-                StartCoroutine("rightTilt"); 
+            {
+                StartCoroutine("rightTilt");
+                Debug.Log("RightClicked");
+            }
            
             pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
             pos.z = Mathf.Clamp(pos.z + translationY, negZBound, posZBound);

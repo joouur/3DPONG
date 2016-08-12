@@ -48,9 +48,10 @@ namespace Pong.Gameplay
                 pdRb.MovePosition(transform.position + pos * Time.deltaTime);
                 thrustEnabled = false;
             }
-              
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForEndOfFrame();  
+            yield return new WaitForSeconds(0.1f);
             pdRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
+            yield return new WaitForSeconds(0.018f);
             thrustEnabled = true;  
         }
         IEnumerator forwardTilt()
@@ -60,9 +61,10 @@ namespace Pong.Gameplay
                 transform.Rotate(25f, 0f, 0f);      
                 ftilt = false;
             }
-            yield return new WaitForSeconds(0.2f);
-            //transform.Rotate(0f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.12f);
             transform.rotation = Quaternion.identity;
+            yield return new WaitForSeconds(0.018f);
             ftilt = true; 
         }
         IEnumerator backwardTilt()
@@ -72,9 +74,10 @@ namespace Pong.Gameplay
                 transform.Rotate(-25f, 0f, 0f);  
                 btilt = false;
             }
-            yield return new WaitForSeconds(0.2f);
-            //transform.Rotate(0f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.12f);
             transform.rotation = Quaternion.identity;
+            yield return new WaitForSeconds(0.018f);
             btilt = true;
         }
         IEnumerator leftTilt()
@@ -84,9 +87,10 @@ namespace Pong.Gameplay
                 transform.Rotate(0f, 0f, 25f);  
                 ltilt = false;
             }
-            yield return new WaitForSeconds(0.2f);
-            //transform.Rotate(0f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.12f);
             transform.rotation = Quaternion.identity;
+            yield return new WaitForSeconds(0.018f);
             ltilt = true;
         }
         IEnumerator rightTilt()
@@ -96,9 +100,10 @@ namespace Pong.Gameplay
                 transform.Rotate(0f, 0f, -25f);  
                 rtilt = false;
             }
-            yield return new WaitForSeconds(0.2f);
-            //transform.Rotate(0f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.12f);
             transform.rotation = Quaternion.identity;
+            yield return new WaitForSeconds(0.018f);
             rtilt = true;
         }
        

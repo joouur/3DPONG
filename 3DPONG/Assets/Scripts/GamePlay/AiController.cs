@@ -58,6 +58,7 @@ namespace Pong.Gameplay
             {
                 ball = GameObject.FindGameObjectWithTag("Ball").transform;
                 hitModifier = Random.Range(edgeSensitivity, 70);
+                isHit = true;
             }
             else
             {   //2.2f left and right edge
@@ -107,7 +108,7 @@ namespace Pong.Gameplay
                         Debug.Log("AI says FUCK YOU!!!");
                     }  
                 }
-                if (ball.position.y > 0)
+                if (ball.GetComponent<Ball>().speed.y < 0)
                     isHit = true;
             }
             

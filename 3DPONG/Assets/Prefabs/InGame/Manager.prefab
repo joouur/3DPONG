@@ -195,7 +195,6 @@ MonoBehaviour:
   PauseMenu: {fileID: 0}
   MainMenu: {fileID: 0}
   OptionsMenu: {fileID: 0}
-  WinnerScreen: {fileID: 0}
 --- !u!114 &11450978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,9 +223,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayUI: {fileID: 0}
+  WinnerScreen: {fileID: 0}
   bounces: 0
   pScore: 0
   aScore: 0
+  round: 0
+  rA: 0
+  rP: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -19,6 +19,11 @@ namespace Pong.UI
 
         private Text SongName;
 
+        private void Start()
+        {
+            SongName = GameObject.Find("SongName").GetComponent<Text>();
+        }
+
         void Awake()
         {
             if (Instance != null)
@@ -35,13 +40,13 @@ namespace Pong.UI
             {
                 anim = panelStart.GetComponent<Animator>();
             }
+            SongName = GameObject.Find("SongName").GetComponent<Text>();
+
             //panelStart.SetActive(true);
             panelEnd.SetActive(true);
             //anim.SetBool("Start", false);
             //StartCoroutine(StartScreen());
             StartCoroutine(SongNames());
-            SongName = GameObject.Find("SongName").GetComponent<Text>();
-
         }
 
         public void StartGame()
@@ -84,18 +89,27 @@ namespace Pong.UI
                     s = AudioManager.Instance.GetSongName();
                     i = 0;
                 }
-                if (s.Length <= 20)
+                if (s.Length > 1)
                 {
-                    SongName.text = s;
-                    SongName.resizeTextForBestFit = true;
+                    if (s.Length <= 20)
+                    {
+                        SongName.text = s;
+                        SongName.resizeTextForBestFit = true;
+                    }
+                    else
+                    {
+                        SongName.resizeTextForBestFit = false;
+                        SongName.text = s.Substring(i, 14).ToString();
+                        //Debug.Log(string.Format("in i, i = {0}, length = {1}", i, s.Length));
+                        if (i == s.Length - 13)
+                            i = 0;
+                    }
                 }
                 else
                 {
-                    SongName.resizeTextForBestFit = false;
-                    SongName.text = s.Substring(i, 14).ToString();
-                    //Debug.Log(string.Format("in i, i = {0}, length = {1}", i, s.Length));
-                    if (i == s.Length - 13)
-                        i = 0;
+                    s = "No audio name found!";
+                    SongName.text = s;
+                    SongName.resizeTextForBestFit = true;
                 }
                 i++;
                 if (i == s.Length - 13)

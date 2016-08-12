@@ -63,6 +63,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 445786}
   - 108: {fileID: 10865666}
+  - 122: {fileID: 12257762}
   m_Layer: 8
   m_Name: Point light
   m_TagString: Untagged
@@ -79,6 +80,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 486070}
   m_RootOrder: 0
@@ -91,6 +93,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 486070}
   m_RootOrder: 1
@@ -103,6 +106,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 486070}
   m_RootOrder: 2
@@ -115,6 +119,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.0618463, y: 16.675037, z: -41.284653}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 445786}
   - {fileID: 458416}
@@ -292,6 +297,17 @@ MonoBehaviour:
   BallRb: {fileID: 0}
   magnitude: 0
   maxAngularSpeed: 25
+--- !u!122 &12257762
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186236}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4288205434
+  m_Size: 0.7
 --- !u!122 &12282544
 Halo:
   m_ObjectHideFlags: 1
@@ -1588,19 +1604,19 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4291887099
+          rgba: 13957119
         key1:
           serializedVersion: 2
-          rgba: 4294959260
+          rgba: 510452735
         key2:
           serializedVersion: 2
-          rgba: 13604699
+          rgba: 4032763
         key3:
           serializedVersion: 2
-          rgba: 16742522
+          rgba: 16740265
         key4:
           serializedVersion: 2
-          rgba: 16738753
+          rgba: 16753539
         key5:
           serializedVersion: 2
           rgba: 0
@@ -1611,23 +1627,23 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 0
-        ctime1: 8867
-        ctime2: 17348
-        ctime3: 30455
-        ctime4: 65342
+        ctime1: 5174
+        ctime2: 7090
+        ctime3: 45875
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 3855
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
         m_NumColorKeys: 5
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         key0:
           serializedVersion: 2

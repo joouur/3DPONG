@@ -24,11 +24,13 @@ namespace Pong.UI
             else
                 Instance = this;
 
+            Time.timeScale = 1;
             PauseMenu.enabled = false;
             MainMenu.enabled = false;
             OptionsMenu.enabled = false;
 
-            Cursor.visible = !Cursor.visible;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             //OptionsMenu.enabled = false;
         }
 
@@ -53,8 +55,14 @@ namespace Pong.UI
             PauseMenu.enabled = !PauseMenu.enabled;
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
             Cursor.visible = !Cursor.visible;
-
+            
             MainMenu.enabled = !MainMenu.enabled;
+            if (Cursor.lockState == CursorLockMode.Locked)
+                Cursor.lockState = CursorLockMode.None;
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             //AudioListener.pause = !AudioListener.pause;
         }
         

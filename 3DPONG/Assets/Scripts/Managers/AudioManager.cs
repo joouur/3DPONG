@@ -269,16 +269,18 @@ namespace Pong.Managers
 
         public string GetSongName()
         {
-            if (audioSource.clip.name == null)
+
+            if (audioSource.clip)
             {
                 //Debug.Log("Runnning null");
-                return "Waiting for Audio.";
+                return audioSource.clip.name;
             }
             else
             {
                 //Debug.Log("Runnning with name: " + audioSource.clip.name);
-                return audioSource.clip.name;
+                return "Waiting for Audio.";
             }
+
         }
         #endregion
     }

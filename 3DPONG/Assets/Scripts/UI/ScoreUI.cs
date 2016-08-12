@@ -150,12 +150,12 @@ namespace Pong.UI
                     if (aScore >= 11)
                     {
                         C_Score = C_Score + string.Format("Winner AI {0} - {1} P\n", aScore, pScore);
-                        rA++;
+                        rA = rA + 1;
                     }
                     else if (pScore >= 11)
                     {
                         C_Score = C_Score + string.Format("Winner P {0} - {1} AI\n", pScore, aScore);
-                        rP++;
+                        rP = rP + 1;
                     }
 
                     if (round >= 4)
@@ -169,7 +169,7 @@ namespace Pong.UI
                             fs = false;
                         }
                         SetWinner(fs);
-                        ResetScores();
+                        //ResetScores();
                     }
                     else
                     {

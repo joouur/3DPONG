@@ -21,7 +21,7 @@ namespace Pong.Gameplay
         float edgeSensitivity = 20;
         public float thrustSpeed = 10f;
         public bool thrustEnabled = false;
-        bool isHit = true;
+        public bool isHit = true;
         Transform ball;
         Vector3 startPos = new Vector3(-3.094f, -24.15f, 2.801f);
         // Use this for initialization

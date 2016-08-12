@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Pong.UI;
+using Pong.Gameplay;
 
 namespace Pong.Managers
 {
@@ -11,6 +12,7 @@ namespace Pong.Managers
 
         private GameObject RBObj;
         private GameObject RBTran;
+        private GameObject aiPaddle;
 
 
         public void Awake()
@@ -33,10 +35,16 @@ namespace Pong.Managers
             RBTran = null;
             BallNew();
         }
+        public void ResetAI()
+        {
+            aiPaddle = GameObject.FindGameObjectWithTag("Enemy");
+            aiPaddle.GetComponent<AiController>().isHit = true;
+        }
 
         public void ResetTheBall()
         {
             BallReset();
+            ResetAI();
             if (ScoreUI.Instance.pScore != 0)
             {
                 ScoreUI.Instance.pScore--;

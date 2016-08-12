@@ -76,6 +76,7 @@ namespace Pong.Gameplay
                 if (other.collider.tag == "Player")
                 {
                     ScoreUI.Instance.SetBounces();
+                    HelpSpawnManager.Instance.SetNewObject();
                     ColSound(0, AudioManager.Instance.soundVolume);
                 }
                 else

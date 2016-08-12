@@ -73,7 +73,7 @@ namespace Pong.UI
 
         }
 
-        
+        /*
         void LateUpdate()
         {
             if (Input.GetKeyDown(KeyCode.K))
@@ -94,7 +94,7 @@ namespace Pong.UI
                 SetWinner(true);
             }
         }
-        
+        */
 
         public void ScorePlayer()
         {
@@ -206,6 +206,12 @@ namespace Pong.UI
         private void EnableWinner()
         {
             WinnerScreen.enabled = !WinnerScreen.enabled;
+            if (Cursor.lockState == CursorLockMode.Locked)
+                Cursor.lockState = CursorLockMode.None;
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
 
         public void ResetScores()

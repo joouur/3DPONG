@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pong.UI;
 
 namespace Pong.Managers
 {
@@ -31,6 +32,16 @@ namespace Pong.Managers
             Destroy(RBTran.gameObject);
             RBTran = null;
             BallNew();
+        }
+
+        public void ResetTheBall()
+        {
+            BallReset();
+            if (ScoreUI.Instance.pScore != 0)
+            {
+                ScoreUI.Instance.pScore--;
+                ScoreUI.Instance.ScorePlayer();
+            }
         }
 
         public void BallNew()

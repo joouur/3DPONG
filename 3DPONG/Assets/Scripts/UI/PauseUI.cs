@@ -68,8 +68,15 @@ namespace Pong.UI
         
         public void MenuScene()
         {
-            StartCoroutine(FadeInScene.Instance.onChangeLevel(0));
+            //StartCoroutine(changeToMainMenu());
             //SceneManager.LoadScene(0);
+        }
+
+        public IEnumerator changeToMainMenu()
+        {
+            float fadeTime = FadeInScene.Instance.BeginFade(1);
+            yield return new WaitForSeconds(fadeTime);
+            SceneManager.LoadScene(0);
         }
 
         public void ExitMenu()

@@ -18,7 +18,7 @@ namespace Pong.Gameplay
         float lrEdge = 2.11f;
         float udEdge = 1.27f;
         private Rigidbody aiRb;
-        float edgeSensitivity = 20;
+        float edgeSensitivity = 20f;
         public float thrustSpeed = 10f;
         public bool thrustEnabled = false;
         public bool isHit = true;
@@ -31,6 +31,7 @@ namespace Pong.Gameplay
             aiRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             GetComponent<Rigidbody>().isKinematic = true;
             transform.position = startPos;
+            StartCoroutine("noThrustOnStart");
            
         }
         IEnumerator thrust()
@@ -45,6 +46,12 @@ namespace Pong.Gameplay
             aiRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
             thrustEnabled = true;
         }
+        IEnumerator noThrustOnStart()
+        {
+            yield return new WaitForSeconds(15);
+            thrustEnabled = true;
+            yield return null;
+        }
         public void OnCollisionEnter(Collision other)
         {
 
@@ -54,11 +61,13 @@ namespace Pong.Gameplay
         // Update is called once per frame
         void FixedUpdate()
         {
+            
             if (ball == null)
             {
                 ball = GameObject.FindGameObjectWithTag("Ball").transform;
-                hitModifier = Random.Range(edgeSensitivity, 70);
+                hitModifier = Random.Range(edgeSensitivity, 70f);
                 isHit = true;
+                StartCoroutine("noThrustOnStart");
             }
             else
             {   //2.2f left and right edge
@@ -102,14 +111,17 @@ namespace Pong.Gameplay
                     pos.x = Mathf.Clamp(ballX, negXBound, posXBound);
                     pos.z = Mathf.Clamp(ballz, negZBound, posZBound);
                     transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
-                    if ((hitModifier >=26 && hitModifier <= 28) && ball.position.y < -22f && thrustEnabled)
+                    //Debug.Log("thrust = " + thrustEnabled);
+                    if ((hitModifier > 24f && hitModifier < 29f) && ball.position.y < -22f && thrustEnabled)
                     {
                         StartCoroutine("thrust");
-                        Debug.Log("AI says FUCK YOU!!!");
+                        //Debug.Log("AI says FUCK YOU!!!");
                     }  
                 }
                 if (ball.GetComponent<Ball>().speed.y < 0)
                     isHit = true;
+                if (ball.GetComponent<Ball>().speed.y > 90f)
+                    speed = 35f;
             }
             
              

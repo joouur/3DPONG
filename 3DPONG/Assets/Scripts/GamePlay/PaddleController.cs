@@ -39,20 +39,25 @@ namespace Pong.Gameplay
             //gameObject.GetComponent<Renderer>().material.color = 0;
             startPause = transform.position;
         }
-
         IEnumerator thrust()
         {
-            Vector3 pos = new Vector3(0f, -40f, 0f); 
             if (thrustEnabled)
             {
+                Vector3 pos = new Vector3(0f, -40f, 0f);
                 pdRb.MovePosition(transform.position + pos * Time.deltaTime);
                 thrustEnabled = false;
             }
-            yield return new WaitForEndOfFrame();  
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForEndOfFrame();
+            //yield return new WaitForSeconds(0.1f);
+            //pdRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
+            //yield return new WaitForSeconds(0.018f);
+            //thrustEnabled = true;  
+        }
+        IEnumerator thrustReturn()
+        {
             pdRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
-            yield return new WaitForSeconds(0.018f);
-            thrustEnabled = true;  
+            thrustEnabled = true;
+            yield return new WaitForEndOfFrame();
         }
         IEnumerator forwardTilt()
         {
@@ -62,10 +67,10 @@ namespace Pong.Gameplay
                 ftilt = false;
             }
             yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(0.12f);
-            transform.rotation = Quaternion.identity;
-            yield return new WaitForSeconds(0.018f);
-            ftilt = true; 
+            //yield return new WaitForSeconds(0.12f);
+            //transform.rotation = Quaternion.identity;
+            //yield return new WaitForSeconds(0.018f);
+            //ftilt = true; 
         }
         IEnumerator backwardTilt()
         {
@@ -75,10 +80,10 @@ namespace Pong.Gameplay
                 btilt = false;
             }
             yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(0.12f);
-            transform.rotation = Quaternion.identity;
-            yield return new WaitForSeconds(0.018f);
-            btilt = true;
+            // yield return new WaitForSeconds(0.12f);
+            //transform.rotation = Quaternion.identity;
+            //yield return new WaitForSeconds(0.018f);
+            // btilt = true;
         }
         IEnumerator leftTilt()
         {
@@ -88,10 +93,10 @@ namespace Pong.Gameplay
                 ltilt = false;
             }
             yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(0.12f);
-            transform.rotation = Quaternion.identity;
-            yield return new WaitForSeconds(0.018f);
-            ltilt = true;
+            //yield return new WaitForSeconds(0.12f);
+            //transform.rotation = Quaternion.identity;
+            //yield return new WaitForSeconds(0.018f);
+            //ltilt = true;
         }
         IEnumerator rightTilt()
         {
@@ -101,14 +106,42 @@ namespace Pong.Gameplay
                 rtilt = false;
             }
             yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(0.12f);
-            transform.rotation = Quaternion.identity;
-            yield return new WaitForSeconds(0.018f);
-            rtilt = true;
+            //yield return new WaitForSeconds(0.12f);
+            //transform.rotation = Quaternion.identity;
+            //yield return new WaitForSeconds(0.018f);
+            //rtilt = true;
         }
-       
+        IEnumerator rightReturn()
+        {
+            transform.rotation = Quaternion.identity;
+            rtilt = true;
+            yield return new WaitForEndOfFrame();
+
+        }
+        IEnumerator leftReturn()
+        {
+            transform.rotation = Quaternion.identity;
+            ltilt = true;
+            yield return new WaitForEndOfFrame();
+
+        }
+        IEnumerator backwardReturn()
+        {
+            transform.rotation = Quaternion.identity;
+            btilt = true;
+            yield return new WaitForEndOfFrame();
+
+        }
+        IEnumerator forwardReturn()
+        {
+            transform.rotation = Quaternion.identity;
+            ftilt = true;
+            yield return new WaitForEndOfFrame();
+
+        }
+            
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             //these two translations get the mouse position and multiply it by a set speed
             //it is then multiplied by timedelta and then the translation is made.
@@ -125,28 +158,37 @@ namespace Pong.Gameplay
                 StartCoroutine("thrust");
                 Debug.Log("MouseClicked");
             }
-
+            if (Input.GetMouseButtonUp(0))
+                StartCoroutine("thrustReturn");
             if (Input.GetKeyDown(KeyCode.W))
             {
                 StartCoroutine("forwardTilt");
                 Debug.Log("UpClicked");
             }
+            if (Input.GetKeyUp(KeyCode.W))
+                StartCoroutine("forwardReturn");
+
             if (Input.GetKeyDown(KeyCode.S))
             {
                 StartCoroutine("backwardTilt");
                 Debug.Log("DownClicked");
             }
+            if (Input.GetKeyUp(KeyCode.S))
+                StartCoroutine("backwardReturn");
             if (Input.GetKeyDown(KeyCode.A))
             {
                 StartCoroutine("leftTilt");
                 Debug.Log("LeftClicked");
             }
+            if (Input.GetKeyUp(KeyCode.A))
+                StartCoroutine("leftReturn");
             if (Input.GetKeyDown(KeyCode.D))
             {
                 StartCoroutine("rightTilt");
                 Debug.Log("RightClicked");
             }
-           
+            if (Input.GetKeyUp(KeyCode.D))
+                StartCoroutine("rightReturn");
             pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
             pos.z = Mathf.Clamp(pos.z + translationY, negZBound, posZBound);
             //transform.position = Vector3.SmoothDamp(transform.position, pos, ref speed, smoothFactor);

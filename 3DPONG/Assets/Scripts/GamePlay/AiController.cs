@@ -30,7 +30,7 @@ namespace Pong.Gameplay
             aiRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             GetComponent<Rigidbody>().isKinematic = true;
             transform.position = startPos;
-            StartCoroutine("noThrustOnStart");
+            StartCoroutine("thrustCoolDown");
            
         }
         IEnumerator thrust()
@@ -45,9 +45,8 @@ namespace Pong.Gameplay
             aiRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
             thrustEnabled = true;
         }
-        IEnumerator noThrustOnStart()
+        IEnumerator thrustCoolDown()
         {
-            thrustEnabled = false;
             yield return new WaitForSeconds(15);
             thrustEnabled = true;
             yield return null;
@@ -67,7 +66,8 @@ namespace Pong.Gameplay
                 ball = GameObject.FindGameObjectWithTag("Ball").transform;
                 hitModifier = Random.Range(edgeSensitivity, 70f);
                 isHit = true;
-                StartCoroutine("noThrustOnStart");
+                thrustEnabled = false;
+                StartCoroutine("thrustCoolDown");
             }
             else
             {   
@@ -110,7 +110,10 @@ namespace Pong.Gameplay
                     pos.z = Mathf.Clamp(ballz, negZBound, posZBound);
                     transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
                     if ((hitModifier > 24f && hitModifier < 29f) && ball.position.y < -22f && thrustEnabled)
+                    {
                         StartCoroutine("thrust");
+                        StartCoroutine("thrustCoolDown");
+                    }
                 }
                 if (ball.GetComponent<Ball>().speed.y < 0)
                     isHit = true;

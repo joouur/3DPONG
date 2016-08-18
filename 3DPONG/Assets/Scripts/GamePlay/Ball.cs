@@ -79,7 +79,7 @@ namespace Pong.Gameplay
                     HelpSpawnManager.Instance.SetNewObject();
                     ColSound(0, AudioManager.Instance.soundVolume);
                 }
-                else if (other.collider.tag == "Obstacle" && transform.position.y < 0)
+                else if (other.collider.tag == "Obstacle")
                 {
                     GameObject AiPaddle = GameObject.FindGameObjectWithTag("Enemy");
                     AiPaddle.GetComponent<AiController>().isHit = true;

@@ -115,8 +115,6 @@ namespace Pong.Gameplay
         // Update is called once per frame
         void Update()
         {
-            //these two translations get the mouse position and multiply it by a set speed
-            //it is then multiplied by timedelta and then the translation is made.
             Vector3 pos = transform.position;
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");

@@ -15,10 +15,7 @@ namespace Pong.Gameplay
         public float posXBound = 3.993f;
         public float negZBound = -3.21f;
         public float posZBound = 3.21f;
-        public float smoothFactor = 0.3f;
-        private Vector3 velocity = Vector3.zero;
         private Rigidbody pdRb;
-        private Vector3 startPause;
         public float thrustSpeed = 10f;
         public bool thrustEnabled = true;
         public bool ftilt = true;
@@ -26,18 +23,13 @@ namespace Pong.Gameplay
         public bool ltilt = true;
         public bool rtilt = true;
         Vector3 startPos = new Vector3(-3.75f, 23.98f, 2.8f);
-        //public bool thrustKey = Input.GetMouseButtonDown(0);
         // Use this for initialization
         void Start()
         {
-            //Cursor.visible = false;
-           
             transform.position = startPos;
             pdRb = GetComponent<Rigidbody>();
             pdRb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             GetComponent<Rigidbody>().isKinematic = true;
-            //gameObject.GetComponent<Renderer>().material.color = 0;
-            startPause = transform.position;
         }
         IEnumerator thrust()
         {
@@ -48,10 +40,6 @@ namespace Pong.Gameplay
                 thrustEnabled = false;
             }
             yield return new WaitForEndOfFrame();
-            //yield return new WaitForSeconds(0.1f);
-            //pdRb.MovePosition(new Vector3(transform.position.x, startPos.y, transform.position.z));
-            //yield return new WaitForSeconds(0.018f);
-            //thrustEnabled = true;  
         }
         IEnumerator thrustReturn()
         {
@@ -67,10 +55,6 @@ namespace Pong.Gameplay
                 ftilt = false;
             }
             yield return new WaitForEndOfFrame();
-            //yield return new WaitForSeconds(0.12f);
-            //transform.rotation = Quaternion.identity;
-            //yield return new WaitForSeconds(0.018f);
-            //ftilt = true; 
         }
         IEnumerator backwardTilt()
         {
@@ -80,10 +64,6 @@ namespace Pong.Gameplay
                 btilt = false;
             }
             yield return new WaitForEndOfFrame();
-            // yield return new WaitForSeconds(0.12f);
-            //transform.rotation = Quaternion.identity;
-            //yield return new WaitForSeconds(0.018f);
-            // btilt = true;
         }
         IEnumerator leftTilt()
         {
@@ -93,10 +73,6 @@ namespace Pong.Gameplay
                 ltilt = false;
             }
             yield return new WaitForEndOfFrame();
-            //yield return new WaitForSeconds(0.12f);
-            //transform.rotation = Quaternion.identity;
-            //yield return new WaitForSeconds(0.018f);
-            //ltilt = true;
         }
         IEnumerator rightTilt()
         {
@@ -106,10 +82,6 @@ namespace Pong.Gameplay
                 rtilt = false;
             }
             yield return new WaitForEndOfFrame();
-            //yield return new WaitForSeconds(0.12f);
-            //transform.rotation = Quaternion.identity;
-            //yield return new WaitForSeconds(0.018f);
-            //rtilt = true;
         }
         IEnumerator rightReturn()
         {
@@ -191,8 +163,6 @@ namespace Pong.Gameplay
                 StartCoroutine("rightReturn");
             pos.x = Mathf.Clamp(pos.x + translationX, negXBound, posXBound);
             pos.z = Mathf.Clamp(pos.z + translationY, negZBound, posZBound);
-            //transform.position = Vector3.SmoothDamp(transform.position, pos, ref speed, smoothFactor);
-            //transform.position = pos;
             transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * speed);
         }
     }

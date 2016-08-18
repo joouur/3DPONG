@@ -5,7 +5,6 @@ namespace Pong.Gameplay
 {
     public class AiController : MonoBehaviour
     {
-
         public float speed = 25f;
         public float negXBound = -3.96f;
         public float posXBound = 3.993f;
@@ -48,6 +47,7 @@ namespace Pong.Gameplay
         }
         IEnumerator noThrustOnStart()
         {
+            thrustEnabled = false;
             yield return new WaitForSeconds(15);
             thrustEnabled = true;
             yield return null;
@@ -70,8 +70,7 @@ namespace Pong.Gameplay
                 StartCoroutine("noThrustOnStart");
             }
             else
-            {   //2.2f left and right edge
-                //1.3f up and down edge
+            {   
                 float ballX;
                 float ballz;   
                     
@@ -84,7 +83,6 @@ namespace Pong.Gameplay
                     {
                         hitModifier = Random.Range(edgeSensitivity, 70f);
                         checkRand = false;
-                        //Debug.Log("edgeModifier: " + hitModifier.ToString());
                     }
                     if (hitModifier >60 && hitModifier <= 64)
                     {
@@ -111,20 +109,14 @@ namespace Pong.Gameplay
                     pos.x = Mathf.Clamp(ballX, negXBound, posXBound);
                     pos.z = Mathf.Clamp(ballz, negZBound, posZBound);
                     transform.position = transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
-                    //Debug.Log("thrust = " + thrustEnabled);
                     if ((hitModifier > 24f && hitModifier < 29f) && ball.position.y < -22f && thrustEnabled)
-                    {
                         StartCoroutine("thrust");
-                        //Debug.Log("AI says FUCK YOU!!!");
-                    }  
                 }
                 if (ball.GetComponent<Ball>().speed.y < 0)
                     isHit = true;
                 if (ball.GetComponent<Ball>().speed.y > 90f)
                     speed = 35f;
-            }
-            
-             
+            }  
         }
     }
 }

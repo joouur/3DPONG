@@ -21,6 +21,7 @@ namespace Pong.Gameplay
         public float thrustSpeed = 10f;
         public bool thrustEnabled = false;
         public bool isHit = true;
+        public float thrustDistance = 40f;
         Transform ball;
         Vector3 startPos = new Vector3(-3.094f, -24.15f, 2.801f);
         // Use this for initialization
@@ -35,7 +36,7 @@ namespace Pong.Gameplay
         }
         IEnumerator thrust()
         {
-            Vector3 pos = new Vector3(0f, 40f, 0f);
+            Vector3 pos = new Vector3(0f, thrustDistance, 0f);
             if (thrustEnabled)
             {
                 aiRb.MovePosition(transform.position + pos * Time.deltaTime);

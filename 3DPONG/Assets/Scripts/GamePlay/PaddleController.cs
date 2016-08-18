@@ -22,6 +22,8 @@ namespace Pong.Gameplay
         public bool btilt = true;
         public bool ltilt = true;
         public bool rtilt = true;
+        public float tiltDegree = 15f;
+        public float thrustDistance = 45f;
         Vector3 startPos = new Vector3(-3.75f, 23.98f, 2.8f);
         // Use this for initialization
         void Start()
@@ -35,7 +37,7 @@ namespace Pong.Gameplay
         {
             if (thrustEnabled)
             {
-                Vector3 pos = new Vector3(0f, -40f, 0f);
+                Vector3 pos = new Vector3(0f, -thrustDistance, 0f);
                 pdRb.MovePosition(transform.position + pos * Time.deltaTime);
                 thrustEnabled = false;
             }
@@ -51,7 +53,7 @@ namespace Pong.Gameplay
         {
             if (ftilt)
             {
-                transform.Rotate(25f, 0f, 0f);      
+                transform.Rotate(tiltDegree, 0f, 0f);      
                 ftilt = false;
             }
             yield return new WaitForEndOfFrame();
@@ -60,7 +62,7 @@ namespace Pong.Gameplay
         {
             if (btilt)
             {
-                transform.Rotate(-25f, 0f, 0f);  
+                transform.Rotate(-tiltDegree, 0f, 0f);  
                 btilt = false;
             }
             yield return new WaitForEndOfFrame();
@@ -69,7 +71,7 @@ namespace Pong.Gameplay
         {
             if (ltilt)
             {
-                transform.Rotate(0f, 0f, 25f);  
+                transform.Rotate(0f, 0f, tiltDegree);  
                 ltilt = false;
             }
             yield return new WaitForEndOfFrame();
@@ -78,7 +80,7 @@ namespace Pong.Gameplay
         {
             if (rtilt)
             {
-                transform.Rotate(0f, 0f, -25f);  
+                transform.Rotate(0f, 0f, -tiltDegree);  
                 rtilt = false;
             }
             yield return new WaitForEndOfFrame();

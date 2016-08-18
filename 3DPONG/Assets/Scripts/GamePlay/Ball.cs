@@ -71,7 +71,7 @@ namespace Pong.Gameplay
 
         public void OnCollisionEnter(Collision other)
         {
-            if (other.collider.tag == "Player" || other.collider.tag == "Enemy")
+            if (other.collider.tag == "Player" || other.collider.tag == "Enemy" || other.collider.tag == "Obstacle")
             {
                 if (other.collider.tag == "Player")
                 {
@@ -83,6 +83,7 @@ namespace Pong.Gameplay
                 {
                     GameObject AiPaddle = GameObject.FindGameObjectWithTag("Enemy");
                     AiPaddle.GetComponent<AiController>().isHit = true;
+                    ColSound(1, (int)(AudioManager.Instance.soundVolume * 0.75f));
                 }
                 else
                 {

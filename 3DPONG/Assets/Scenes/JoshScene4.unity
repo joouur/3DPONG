@@ -937,6 +937,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11454240, guid: 6578dd1937a8f454381db7c2026a3983, type: 2}
+      propertyPath: tiltDegree
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454240, guid: 6578dd1937a8f454381db7c2026a3983, type: 2}
+      propertyPath: thrustDistance
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6578dd1937a8f454381db7c2026a3983, type: 2}
   m_IsPrefabParent: 0
